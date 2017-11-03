@@ -1,0 +1,41 @@
+package groupthree.myspace.hjn.service;
+
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Service;
+
+import groupthree.myspace.bean.person;
+
+@Service
+public interface HPersonService {
+	
+		//删除用户通过Id
+		int updatePersonById(int id,int i);
+		
+		//删除说说通过Id
+		int updateImgLogById(int id);
+		
+		//删除说说评论通过Id
+		int updateImgLogCmtById(int id);
+		
+		//删除相册通过Id
+		int updateAldumById(int id);
+	
+		//删除相片通过Id
+		int updatePictureById(int id);
+	
+		//删除好友通过Id
+		int updateFriendById(int id);
+		
+		//更改用户昵称
+		int updatePersonNameById(@Param("id")int id,@Param("name")String name);
+		//更改用户密码
+		int updatePersonPwdById(@Param("id")int id,@Param("pwd")String pwd);
+		//更改用户性别
+		int updatePersonSexById(@Param("id")int id,@Param("sex")String sex);
+		//更改用户生日
+		int updatePersonBirById(@Param("id")int id,@Param("birthday")String birthday);
+		//更改用户头像
+		int updatePersonImgById(@Param("id")int id,@Param("img")String img);
+		//更改用户个性签名
+		int updatePersonSignById(@Param("id")int id,@Param("signature")String signature);
+}

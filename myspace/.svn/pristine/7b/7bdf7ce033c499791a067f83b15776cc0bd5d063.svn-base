@@ -1,0 +1,92 @@
+jQuery(document).ready(function(){
+	setTopNav();
+	setName();
+	showImgLog();
+});
+
+function setTopNav(){
+	var navBody='<div class="navigation-up"><div class="navigation-inner" ><div class="navigation-v3" ><ul >';
+	navBody+='<li class="nav-up-selected-inpage" _t_nav="home"><h2><a style="font-size: 18px;"><img class="personImg" src="all/images/myspace2.png">myspace</a></h2></li>';
+	navBody+='<li class="selectNav" _t_nav="product"><h2><a href="#"><div id="friendTrends"></div>好友动态</a></h2></li>';
+	navBody+='<li class="" _t_nav="wechat"><h2><a href="#"><div id="findFriend"></div>找朋友?</a></h2></li>';
+	navBody+='<li><h2><a href="#" style="width: 400px;"></a></h2></li>';
+	navBody+='<li class="" _t_nav="cooperate"><h2><a href="#" class="tooltips" tooltip="" tooltip-position="bottom"><span>';
+	navBody+='<img src="all/images/w6.jpg">我是胖虎</span><img class="personImg" src="all/images/w6.jpg" /><font id="SmallPersonName">个人姓名</font></a></h2></li>';
+	navBody+='<li _t_nav="support" "><h2><a href="#">帮助与支持</a></h2></li>';
+	navBody+='</ul></div></div></div>';
+	$(".head-v3").html(navBody);
+}
+
+function setName(){
+	$.ajax({
+		url:"/myspace/personAction/setPersonInfo",
+		async:false,
+		dataType:"json",
+		success:function(data){
+			$("#SmallPersonName").html(data.name);
+			$("#BigPersonName").html(data.name);
+			$("#personName1").html(data.name);
+		}
+	});
+}
+
+
+
+function showImgLog(){
+	$("#chat").hide();
+	
+	$("#ImgLog").fadeIn('2000');
+	
+}
+
+function showFriends(){
+	$("#ImgLog").hide();
+	$.ajax({
+		type:"get",
+		async:false,
+		url:"/myspace/friendAction/setFriendList",
+		dataType:"json",
+		success:function(data){
+			if(data.length>0){
+				var list = '';
+				for(var i=0;i<data.length;i++){
+					if(data[i].is_delete==0){
+					//alert(data[i].remark);
+						list+='<ul><li class="" value="'+data[i].friend_id+'"><img class="avatar" width="30"';
+						list+='height="30" alt="示例介绍" src="all/img/1_copy.jpg">';
+						list+='<p class="name">'+data[i].remark+'</p></li></ul>';
+					}
+				}
+				$("#friendList").html(list);
+				$("#chatFriend").text($("#friendList li:first p").html());
+				$(".m-message").attr("value",data[0].friend_id);
+				setChatLog();
+			}
+			else{
+				$("#chatFriend").text("当前没有好友");
+			}
+		}
+	});
+	$("#chat").fadeIn('slow');
+	$("#friendList li").click(function() {
+		$(".m-message").attr("value",$(this).prop("value"));
+		$("#chatFriend").text($(this).text());
+		setChatLog();
+	})
+	
+}
+
+function setChatLog(){
+	var friendId = $(".m-message").attr("value");
+	/*alert(friendId);*/
+	$.ajax({
+		type:"post",
+		url:"/myspace/friendAction/setChatLog",
+		data:{"friend_id":friendId},
+		dataType:"json",
+		success:function(data){
+			
+		}
+	});
+}
+

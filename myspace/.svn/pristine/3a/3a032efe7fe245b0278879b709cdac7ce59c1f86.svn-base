@@ -1,0 +1,87 @@
+package groupthree.myspace.hjn.dao.imp;
+
+import groupthree.myspace.hjn.dao.HBasicDao;
+import groupthree.myspace.hjn.dao.HPersonDao;
+import groupthree.myspace.hjn.mapper.HPersonMapper;
+
+import org.springframework.stereotype.Repository;
+
+
+@Repository(value="HPersonDaoImp")
+public class HPersonDaoImp extends HBasicDao implements HPersonDao{
+	
+	@Override
+	public Integer updatePersonById(Integer id,Integer i) {
+		getMapper(HPersonMapper.class).updatePersonById(id,i);
+		return 1;
+	}
+
+	@Override
+	public Integer updateImgLogById(Integer person_id,Integer id) {
+		getMapper(HPersonMapper.class).updateImgLogById(person_id,id);
+		return 1;
+	}
+
+	@Override
+	public Integer updateAldumById(Integer person_id,Integer id) {
+		getMapper(HPersonMapper.class).updateAldumById(person_id,id);
+		return 1;
+	}
+
+	@Override
+	public Integer updateImgLogCmtById(Integer id) {
+		getMapper(HPersonMapper.class).updateImgLogCmtById(id);
+		return 1;
+	}
+
+	@Override
+	public Integer updatePictureById(Integer id) {
+		getMapper(HPersonMapper.class).updatePictureById(id);
+		return 1;
+	}
+
+	@Override
+	public Integer updateFriendById(Integer id) {
+		getMapper(HPersonMapper.class).updateFriendById(id);
+		return 1;
+	}
+
+	@Override
+	public Integer updatePersonNameById(Integer id, String name) {
+		getMapper(HPersonMapper.class).updatePersonNameById(id, name);
+		return 1;
+	}
+
+	@Override
+	public Integer updatePersonPwdById(Integer id, String pwd) {
+		getMapper(HPersonMapper.class).updatePersonPwdById(id, pwd);
+		return 1;
+	}
+
+	@Override
+	public Integer updatePersonSexById(Integer id, String sex) {
+		getMapper(HPersonMapper.class).updatePersonSexById(id, sex);
+		return 1;
+	}
+
+	@Override
+	public Integer updatePersonBirById(Integer id, String birthday) {
+		getMapper(HPersonMapper.class).updatePersonBirById(id,birthday);
+		return 1;
+	}
+
+	@Override
+	public Integer updatePersonImgById(Integer id, String img) {
+		getMapper(HPersonMapper.class).updatePersonImgById(id, img);
+		return 1;
+	}
+
+	@Override
+	public Integer updatePersonSignById(Integer id, String signature) {
+		getMapper(HPersonMapper.class).updatePersonSignById(id, signature);
+		return 1;
+	}
+
+	
+	
+}

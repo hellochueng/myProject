@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:必须和接口的完全限定名保持一致 -->
+<mapper namespace="groupthree.myspace.lzz.mapper.LzzFriend_Mapper">
+
+	<select id="getFriendAll" resultType="friend">
+		select * from friend where person_id = #{id}
+	</select>
+	
+	<select id="getChatLog" resultType="chatLog">
+		select * from chatlog where
+		SENDER_ID=#{person_id} and GETTER_ID=#{friend_id} 
+		or SENDER_ID=#{friend_id} and GETTER_ID=#{person_id}
+		order by create_time asc
+	</select>
+	
+	<insert id="sendMessage" useGeneratedKeys="true" keyProperty="id">
+		<selectKey resultType="int" order="BEFORE" keyProperty="id">
+			select CHATLOGSEQ.nextVal from dual
+		</selectKey>
+		insert into chatlog values(#{id},#{sender_id},#{getter_id},
+		#{content},to_date(#{create_time},'YYYY-MM-DD HH24:MI:SS'),#{is_delete})
+	</insert>
+</mapper>

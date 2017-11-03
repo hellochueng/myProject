@@ -1,0 +1,213 @@
+jQuery(document).ready(function(){
+	var chatLogSet;
+	setTopNav();
+	setName();
+	showImgLog();
+});
+
+function setTopNav(){
+	var navBody='<div class="navigation-up"><div class="navigation-inner" ><div class="navigation-v3" ><ul >';
+	navBody+='<li class="nav-up-selected-inpage" ><h2><a style="font-size: 18px;" href="../lhf/introduce.html"><img class="personImg" src="all/images/myspace2.png">myspace</a></h2></li>';
+	navBody+='<li class="selectNav" ><h2><a href="#"><div id="friendTrends"></div>好友动态</a></h2></li>';
+	navBody+='<li class=""><h2><a href="findNewFriend.html"><div id="findFriend"></div>找朋友?</a></h2></li>';
+	navBody+='<li><h2><a href="#" style="width: 400px;"></a></h2></li>';
+	navBody+='<li class="" ><h2>';
+	navBody+='<img class="personImg" src="all/images/w6.jpg" /><a href="mainView.html" style="padding-left: 0px"><font class="username" >个人姓名</font></a></h2></li>';
+	navBody+='<li ><h2><a href="#">帮助与支持</a></h2></li>';
+	navBody+='</ul></div></div></div>';
+	$(".head-v3").html(navBody);
+}
+
+function setName(){
+	$.ajax({
+		url:"/myspace/personAction/setPersonInfo.do",
+		async:false,
+		dataType:"json",
+		success:function(data){
+			$(".username").text(data.name);
+		}
+	});
+}
+
+function showImgLog(){
+	//chatLogSet.clearInterval();
+	$("#chat").hide();
+	$("#aldum").hide();
+	$("#Info").hide();
+	$("#ImgLog").fadeIn('2000');
+	
+	//放在最后面
+	window.clearInterval(chatLogSet);
+}
+
+function showFriends(){
+	$("#ImgLog").hide();
+	$("#aldum").hide();
+	$("#Info").hide();
+	$("#chat").fadeIn('slow');
+	$.ajax({
+		type:"get",
+		async:false,
+		url:"/myspace/friendAction/setFriendList.do",
+		dataType:"json",
+		success:function(data){
+			if(data.length>0){
+				var list = '';
+				for(var i=0;i<data.length;i++){
+					if(data[i].is_delete==0){
+					//alert(data[i].remark);
+						list+='<ul><li class="" value="'+data[i].friend_id+'"><img class="avatar" width="30"';
+						list+='height="30" alt="示例介绍" src="all/img/1_copy.jpg">';
+						list+='<p class="name">'+data[i].remark+'</p></li></ul>';
+					}
+				}
+				//把好友list显示
+				$("#friendList").html(list);
+				//把当前聊天者的昵称显示
+				$("#chatFriend").text($("#friendList li:first p").html());
+				//设置当前聊天者的id
+				$(".m-message").attr("value",data[0].friend_id);
+				//将聊天记录显示
+				setChatLog();
+				setchatInterval();
+			}
+			else{
+				$("#chatFriend").text("当前没有好友");
+			}
+		}
+	});
+	
+	
+	
+	$("#friendList li").click(function() {
+		$(".m-message").attr("value",$(this).prop("value"));
+		$("#chatFriend").text($(this).text());
+		//清除聊天计时器
+		window.clearInterval(chatLogSet);
+		//设置聊天记录
+		setChatLog();
+		setchatInterval();
+	})
+}
+function setAldum(){
+	$("#chat").hide();
+	$("#ImgLog").hide();
+	$("#Info").hide();
+	$("#aldum").fadeIn('slow');
+	
+	
+	//放在最后面
+	window.clearInterval(chatLogSet);
+}
+
+function setInfo(){
+	$("#Info").prevAll().hide();
+	$("#Info").fadeIn('slow');
+  function doStep(){
+    // Next Button
+    $('a.next-step').click(function(event){
+      event.preventDefault();
+      // Part 1
+      if($('.alpha').hasClass("in")) {
+        $('.alpha').removeClass("in");
+      }
+      $('.alpha').addClass("out");
+      // Part 2
+      if($('.beta').hasClass("out")) {
+        $('.beta').removeClass("out");
+      }
+      $('.beta').addClass("in");
+    });
+    
+    // Previous Button
+    $('a.prev-step').click(function(event){
+      event.preventDefault(); 
+      $('.alpha').removeClass("out").addClass("in");
+      $('.beta').removeClass("in").addClass("out");
+    });
+    
+    // Submit & Complete
+    $('.submit').click(function(event){
+      event.preventDefault();
+      // Part 1
+      if($('.beta').hasClass("in")) {
+        $('.beta').removeClass("in");
+      }
+      $('.beta').addClass("out");
+      // Part 2
+      if($('.charlie').hasClass("out")) {
+        $('.charlie').removeClass("out");
+      }
+      $('.charlie').addClass("in");
+    });
+  }
+  // Active Functions
+  doStep();
+	
+	//放在最后面
+	window.clearInterval(chatLogSet);
+}
+
+function setChatLog(){
+		$.ajax({
+			type:"post",
+			url:"/myspace/friendAction/setChatLog.do",
+			data:{"friend_id":$(".m-message").attr("value")},
+			async:false,
+			dataType:"json",
+			success:function(data){
+				var chatLogset = "";
+				for(var i = 0;i<data.length;i++){
+					if(data[i].sender_id==$(".m-message").attr("value")){
+						chatLogset+='<li><p class="time"><span>'+data[i].create_time+'</span></p><div class="main">';
+						chatLogset+='<img class="avatar" width="30" height="30" src="all/img/1_copy.jpg">';
+						chatLogset+='<div class="text">'+data[i].content+'</div></div></li>';
+					}else{
+						chatLogset+='<li><p class="time"><span>'+data[i].create_time+'</span></p><div class="main self">';
+						chatLogset+='<img class="avatar" width="30" height="30" src="all/img/1_copy.jpg">';
+						chatLogset+='<div class="text">'+data[i].content+'</div></div></li>';
+					}
+				}
+				$("#messageList").html(chatLogset);
+				$('#message').scrollTop($('#message')[0].scrollHeight);
+			}
+		});
+}
+
+function setchatInterval(){
+	chatLogSet = setInterval(function(){
+		setChatLog();
+	},3000);
+}
+
+document.onkeydown = function(e) {
+    if (13 == e.keyCode && e.ctrlKey)
+    {
+    	var content = $("#sendMessage").val();
+    	$.ajax({
+    		url:"/myspace/friendAction/sendMessage.do",
+    		type:"get",
+    		async:false,
+    		data:{"content":content,"getter_id":$(".m-message").attr("value")},
+    		success:function(data){
+    			$('#message').scrollTop($('#message')[0].scrollHeight);
+    			$("#sendMessage").val("");
+    		}
+    	});
+    }
+}
+
+//ajax这个怪物要配合这个才能过滤       判断是否登录进行请求
+$(document).ajaxComplete(function(event, xhr, settings) {
+    //从http头信息取出 在filter定义的sessionstatus，判断是否是 timeout
+    if(xhr.getResponseHeader("sessionstatus")=="timeout"){ 
+        //从http头信息取出登录的url ＝ loginPath
+        if(xhr.getResponseHeader("loginPath")){
+            alert("您未登录，请重新登陆!");
+            //打会到登录页面
+            window.location.replace(xhr.getResponseHeader("loginPath"));  
+        }else{  
+            alert("请求超时请重新登陆 !");
+        }
+    }  
+});

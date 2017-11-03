@@ -1,0 +1,22 @@
+package groupthree.myspace.lhf.test;
+
+import org.apache.ibatis.session.SqlSession;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class Test {
+	public static void main(String[] args) {
+		ApplicationContext context=new ClassPathXmlApplicationContext("application.xml");
+		SqlSession sqlSession=context.getBean(SqlSession.class);
+		
+		//UserInfoMapper mapper=sqlSession.getMapper(UserInfoMapper.class);
+		
+		//System.out.println(mapper.getUserAll());
+		/*SqlSession sqlSession=context.getBean(SqlSession.class);
+		
+		RolesMapper mapper=sqlSession.getMapper(RolesMapper.class);
+		System.out.println(mapper.getRolesAll());*/
+	}
+}
+	

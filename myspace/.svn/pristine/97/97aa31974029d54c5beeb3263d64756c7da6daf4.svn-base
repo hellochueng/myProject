@@ -1,0 +1,14 @@
+package groupthree.myspace.zfl.dao;
+
+import groupthree.myspace.bean.person;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface IPersonDao {
+	List<person> selectPerson();
+	
+	person selectPersonByNameAndPwd(String name,String pwd);
+}

@@ -1,0 +1,20 @@
+package groupthree.myspace.bean;
+
+import org.apache.ibatis.type.Alias;
+import org.springframework.stereotype.Component;
+
+/**
+ * 
+ * @author lzz
+ * 说说点赞实体类
+ */
+@Component
+@Alias("logliker")
+public class logLiker {
+	private Integer id;
+	//外键点赞者id 关联person主键
+	private Integer liker_id;
+	//点赞创建时间
+	private String create_time;
+	
+}

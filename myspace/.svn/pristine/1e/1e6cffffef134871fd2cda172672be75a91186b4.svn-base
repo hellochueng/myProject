@@ -1,0 +1,27 @@
+/*$(function(){
+	alert()
+	//alert("33")
+	$.get("/myspace/zmhperson/showAldum",{"id":id},function(data){
+		
+		var items=$.parseJSON(data)
+		var msg2="";
+		var Aldummsg=""
+		for(var i=0;i<items.length;i++){
+		  msg2+='<div class="image-box"><div class="photo-cover"><img src="aldumImg/tiger.jpg" width="166px" height="106px" /><p class="photo-name"><a href="javascript:getPicture('+items[i].id+')" >'+items[i].aldumName+'</a><br>'+items[i].create_time+'</p></div></div>'	
+		}
+		$("#aldum").html(msg2)
+	})
+})*/
+
+function zmhSetAldum(){
+	 $.get("/myspace/zmhperson/showAldum",{"id":id},function(data){
+			
+			var items=$.parseJSON(data)
+			var msg2="";
+			var Aldummsg=""
+			for(var i=0;i<items.length;i++){
+			  msg2+='<div class="image-box"><div class="photo-cover"><img src="aldumImg/tiger.jpg" width="166px" height="106px" /><p class="photo-name"><a href="javascript:getPicture('+items[i].id+')" >'+items[i].aldumName+'</a><br>'+items[i].create_time+'</p></div></div>'	
+			}
+			$("#aldum").html(msg2)
+		})
+}

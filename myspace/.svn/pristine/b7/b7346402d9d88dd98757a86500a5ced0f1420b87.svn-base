@@ -1,0 +1,83 @@
+package groupthree.myspace.lzz.service.serviceImpl;
+
+import groupthree.myspace.bean.chatLog;
+import groupthree.myspace.bean.friend;
+import groupthree.myspace.bean.friendApply;
+import groupthree.myspace.bean.person;
+import groupthree.myspace.lzz.dao.LzzFriendDao;
+import groupthree.myspace.lzz.service.LzzFriendService;
+import groupthree.myspace.lzz.service.LzzPersonService;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service(value="LzzFriendService")
+public class LzzFriendServiceImpl implements LzzFriendService{
+	
+	@Resource(name="LzzFriendDao")LzzFriendDao lzzFriendDao;
+	@Autowired
+	friend friend;
+	
+	@Override
+	public List<friend> getFriendAll(Integer id) {
+		return lzzFriendDao.getFriendAll(id);
+	}
+
+	@Override
+	public List<chatLog> getChatLog(Integer person_id, Integer friend_id) {
+		return lzzFriendDao.getChatLog(person_id, friend_id);
+	}
+
+	@Override
+	public int sendMessage(chatLog chat) {
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		chat.setCreate_time(sf.format(new Date()));
+		chat.setIs_delete(0);
+		return lzzFriendDao.sendMessage(chat);
+	}
+
+
+	@Override
+	public List<friendApply> hasApply(Integer id) {
+		return lzzFriendDao.hasApply(id);
+	}
+
+	@Override
+	public boolean beFriend(friendApply friendApply,String remark,String name) {
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		friend.setCreate_time(sf.format(new Date()));
+		friend.setFriend_id(friendApply.getApply_id());
+		friend.setPerson_id(friendApply.getPerson_id());
+		friend.setIs_delete(0);
+		friend.setRemark(remark);
+		if(lzzFriendDao.isFriend(friend)!=null){
+			friendApply.setSituation(1);
+			lzzFriendDao.updateApply(friendApply);
+			return false;
+		}else{
+			lzzFriendDao.beFriend(friend);
+			int temp = friend.getFriend_id();
+			friend.setFriend_id(friend.getPerson_id());
+			friend.setPerson_id(temp);
+			friend.setRemark(name);
+			lzzFriendDao.beFriend(friend);
+			friendApply.setSituation(1);
+			lzzFriendDao.updateApply(friendApply);
+		}
+		return true;
+	}
+
+	@Override
+	public boolean refuseFriend(friendApply friendApply) {
+		friendApply.setSituation(2);
+		if(lzzFriendDao.updateApply(friendApply)>0)
+			return true;
+		return false;
+	}
+}

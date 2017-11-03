@@ -1,0 +1,19 @@
+package groupthree.myspace.lzz.dao.daoImpl;
+
+import groupthree.myspace.bean.friend;
+import groupthree.myspace.lzz.dao.LzzFriendDao;
+import groupthree.myspace.lzz.mapper.LzzFriend_Mapper;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+@Repository(value="LzzFriendDao")
+public class LzzFriendDaoImpl extends LzzBaseDao implements LzzFriendDao{
+
+	@Override
+	public List<friend> getFriendAll(Integer id) {
+		return getMapper(LzzFriend_Mapper.class).getFriendAll(id);
+	}
+
+}

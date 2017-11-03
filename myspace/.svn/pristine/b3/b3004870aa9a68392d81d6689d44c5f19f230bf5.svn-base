@@ -1,0 +1,48 @@
+package groupthree.myspace.lzz.controller;
+
+import groupthree.myspace.bean.chatLog;
+import groupthree.myspace.bean.person;
+import groupthree.myspace.lzz.service.LzzFriendService;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
+
+
+@Controller(value="LzzFriendController")
+@RequestMapping(value="/friendAction",produces="text/plain;charset=utf-8")
+public class LzzFriendController {
+	@Resource(name="LzzFriendService")LzzFriendService lzzFriendService;
+	Gson gson = new Gson();
+	
+	@RequestMapping(value="/setFriendList.do")
+	@ResponseBody
+	public String setFriendList(HttpServletRequest request){
+		person person = (person)request.getSession().getAttribute("user");
+		return gson.toJson(lzzFriendService.getFriendAll(person.getId()));
+	}
+
+	@RequestMapping(value="/setChatLog.do")
+	@ResponseBody
+	public String setChatLog(String friend_id,HttpServletRequest request){
+		person person = (person)request.getSession().getAttribute("user");
+		List<chatLog> chatLog = lzzFriendService.getChatLog(person.getId(), Integer.parseInt(friend_id));
+		return gson.toJson(chatLog);
+	}
+	
+	@RequestMapping(value="/sendMessage.do")
+	@ResponseBody
+	public void sendMessage(chatLog cl,HttpServletRequest request){
+		person p = (person) request.getSession().getAttribute("user");
+		cl.setSender_id(p.getId());
+		lzzFriendService.sendMessage(cl);
+	}
+}

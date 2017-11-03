@@ -1,0 +1,10 @@
+package groupthree.myspace.lzz.dao;
+
+import java.util.List;
+
+import groupthree.myspace.bean.friend;
+import groupthree.myspace.bean.person;
+
+public interface LzzFriendDao {
+	List<friend> getFriendAll(Integer id);
+}

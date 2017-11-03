@@ -1,0 +1,96 @@
+$(function(){
+	//var webName="/myspace/zfl"
+	selectPerson();
+})
+function selectPerson(){
+	$.ajax({
+		url:"/myspace/zfl/selectperson",
+		async:false,
+		//dataType:"json",
+		success:function(data){
+			var list=$.parseJSON(data);
+			var mes="";
+			for(var i=0;i<list.length;i++){
+				mes +="<tr>";
+				mes +="<td>"+list[i].id+"</td>";
+				mes +="<td>"+list[i].name+"</td>";
+				mes +="<td>"+list[i].space+"</td>";
+				mes +="<td>"+list[i].pwd+"</td>";
+				mes +="<td>"+list[i].sex+"</td>";
+				mes +="<td>"+list[i].birthday+"</td>";
+				mes +="<td>"+list[i].create_time+"</td>";
+				mes +="</tr>";
+			}
+			$("tbody").html(mes);
+		}
+	})
+}
+
+function selectFriend(){
+	$("table").html("");
+	var mes="用户ID:<input type='text' id='id' ><input type='button' value='搜索' onclick='doSelect()'>";
+	$("table").html(mes);
+}
+function doSelect(){
+	var id=$("#id").val();
+	$.ajax({
+		url:"/myspace/zfl/selectfriend/"+id,
+		async:false,
+		//dataType:"json",
+		success:function(data){
+			if(data==null){
+				alert("输入的用户ID有误，请重新输入！")
+		}else{
+				$("table").html("");
+				var list=$.parseJSON(data);
+				
+				var mes="<tr><td>好友ID</td><td>好友备注</td><td>创建时间</td></tr>";
+				for(var i=0;i<list.length;i++){
+					mes +="<tr>";
+					mes +="<td>"+list[i].friend_id+"</td>";
+					mes +="<td>"+list[i].remark+"</td>";
+					mes +="<td>"+list[i].create_time+"</td>";
+					mes +="</tr>";
+				}
+				alert("a")
+				$("table").html(mes);}
+			
+		}
+	})
+}
+
+function selectLog(){
+	$.ajax({
+		url:"/myspace/zfl/selectlog",
+		async:false,
+		//dataType:"json",
+		success:function(data){
+			$("table").html("");
+			var list=$.parseJSON(data);
+			alert(list)
+			var mes="<tr><td>用户ID</td><td>用户姓名</td><td>说说创建时间</td><td>说说内容</td><td>说说图片</td><td>说说评论</td><td>说说点赞</td></tr>";
+			for(var i=0;i<list.length;i++){
+				mes +="<tr>";
+				mes +="<td>"+list[i].id+"</td>";
+				mes +="<td>"+list[i].name+"</td>";
+				mes +="<td>"+list[i].create_time+"</td>";
+				mes +="<td>"+list[i].imgLog_content+"</td>";
+				mes +="<td>";
+				for(var j=0;j<list[i].logImg_list.length;j++)
+					mes +=""+list[i].logImg_list[j].logImg+"";
+				mes +="</td>";
+				mes +="<td>";
+				for(var j=0;j<list[i].imgLogCmt_list.length;j++)
+					mes +=""+list[i].imgLogCmt_list[j].comment_content+""+list[i].imgLogCmt_list[j].create_time+"";
+				mes +="</td>";
+				mes +="<td>";
+				for(var j=0;j<list[i].logLiker_list.length;j++)
+					mes +=""+list[i].logLiker_list[j].person_id+""+list[i].logLiker_list[j].create_time+"";
+				mes +="</td>";
+				mes +="</tr>";
+			}
+			$("table").html(mes);
+		}
+	})
+}
+

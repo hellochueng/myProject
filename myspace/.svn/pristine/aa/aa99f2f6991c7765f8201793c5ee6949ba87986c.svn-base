@@ -1,0 +1,33 @@
+package groupthree.myspace.zfl.controller;
+
+import javax.annotation.Resource;
+
+import groupthree.myspace.bean.person;
+import groupthree.myspace.zfl.dao.IPersonDao;
+import groupthree.myspace.zfl.service.IPersonService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@RequestMapping(value = "/zfl")
+@Controller("MyController1")
+public class MyController {
+
+	
+	@Resource(name="zflPersonServiceImp")IPersonService service;
+
+	@ModelAttribute("person")
+	public person getPerson(person per) {
+		return per;
+	}
+
+	@RequestMapping(value = "/login")
+	public String login(@PathVariable("name") String name,
+			@PathVariable("pwd") String pwd) {
+		System.out.println(service.selectPersonByNameAndPwd(name, pwd));
+		return "index";
+	}
+}

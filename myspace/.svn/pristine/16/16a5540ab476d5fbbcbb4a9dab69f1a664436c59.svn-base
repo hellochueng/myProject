@@ -1,0 +1,100 @@
+package groupthree.myspace.hjn.service.imp;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import groupthree.myspace.bean.person;
+import groupthree.myspace.hjn.dao.HPersonDao;
+import groupthree.myspace.hjn.dao.imp.HPersonDaoImp;
+import groupthree.myspace.hjn.service.HPersonService;
+
+
+@Service(value="HPersonServiceImp")
+public class HPersonServiceImp implements HPersonService {
+
+	@Resource(name="HPersonDaoImp")HPersonDao dao;
+
+	@Override
+	public Integer updatePersonById(Integer id,Integer i) {
+		 if(dao.updatePersonById(id,i)>0)
+			 return 1;
+		 else
+			 return 0;
+	}
+
+	@Override
+	public Integer updateImgLogById(Integer person_id,Integer id) {
+		if(dao.updateImgLogById(person_id,id)>0)
+			return 1;
+		else
+			return 0;
+	}
+
+	@Override
+	public Integer updateAldumById(Integer person_id,Integer id) {
+		if(dao.updateAldumById(person_id,id)>0)
+			return 1;
+		else
+			return 0;
+	}
+
+	@Override
+	public Integer updateImgLogCmtById(Integer id) {
+		dao.updateImgLogCmtById(id);
+		return 1;
+	}
+
+	@Override
+	public Integer updatePictureById(Integer id) {
+
+		dao.updatePictureById(id);
+		return 1;
+	}
+
+	@Override
+	public Integer updateFriendById(Integer id) {
+		dao.updateFriendById(id);
+		return 1;
+	}
+
+	@Override
+	public Integer updatePersonNameById(Integer id, String name) {
+		dao.updatePersonNameById(id, name);
+		return 1;
+	}
+
+	@Override
+	public Integer updatePersonPwdById(Integer id, String pwd) {
+		dao.updatePersonPwdById(id, pwd);
+		return 1;
+	}
+
+	@Override
+	public Integer updatePersonSexById(Integer id,String sex) {
+		dao.updatePersonSexById(id, sex);
+		return 1;
+	}
+
+	@Override
+	public Integer updatePersonBirById(Integer id, String birthday) {
+		dao.updatePersonBirById(id, birthday);
+		return 1;
+	}
+
+	@Override
+	public Integer updatePersonImgById(Integer id, String img) {
+		dao.updatePersonImgById(id, img);
+		return 1;
+	}
+
+	@Override
+	public Integer updatePersonSignById(Integer id, String signature) {
+		dao.updatePersonSignById(id, signature);
+		return 1;
+	}
+
+
+}

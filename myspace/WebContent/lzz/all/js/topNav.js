@@ -1,0 +1,82 @@
+function setTopNav() {
+	var navBody = '<div class="navigation-up"><div class="navigation-inner" ><div class="navigation-v3" ><ul >';
+	navBody += '<li class="nav-up-selected-inpage" ><h2><a style="font-size: 18px;" href="mainView.html"><img class="personImg" src="all/images/myspace2.png">myspace</a></h2></li>';
+	navBody += '<li class="selectNav" ><h2><a href="SocialUpdateView.html"><div id="friendTrends"></div>好友动态</a></h2></li>';
+	navBody += '<li class=""><h2><a href="findNewFriend.html"><div id="findFriend"></div>找朋友?</a></h2></li>';
+	navBody += '<li><h2><a href="#" style="width: 400px;"></a></h2></li>';
+	navBody += '<li class="" style="width:150px"><h2>';
+	navBody += '<div class="help-tip"><a href="mainView.html" style="padding-left: 0px"><img class="personImg" id="sPersonImg" src="all/images/w6.jpg" />';
+	navBody += '<font class="username" style="color:white;margin: 0;padding: 0;border: 0;font-size: 100%;font: inherit;vertical-align: baseline;">个人姓名</font></a><p style="color:white;font-size: 100%;" id="panghu">我是胖虎';
+	navBody += '<img src="all/img/1_copy.jpg" /><button style="color:black;width:85%" >退出</buttion></p></div></h2>';
+	navBody += '</li>';
+	navBody += '<li ><h2><a href="../lhf/introduce.html">关于我们</a></h2></li>';
+	navBody += '</ul></div></div></div>';
+	$(".head-v3").html(navBody);
+}
+
+function perosnExist(){
+	$.ajax({
+		type:"get",
+		url:"/myspace/personAction/perosnExist.do",
+		success:function(data){
+			if(data=="ok"){
+				alert("退出成功，欢迎再来哟(＾Ｕ＾)ノ~ＹＯ");
+				window.location.href="/myspace/lhf/introduce.html";
+			}
+		}
+	});
+}
+
+function setName() {
+	$.ajax({
+		url : "/myspace/personAction/setPersonInfo.do",
+		async : false,
+		dataType : "json",
+		success : function(data) {
+			$(".username").text(data.name);
+		}
+	});
+}
+
+function setName() {
+	$.ajax({
+		url : "/myspace/personAction/setPersonInfo.do",
+		async : false,
+		dataType : "json",
+		success : function(data) {
+			$(".username").text(data.name);
+			$("#sPersonImg").prop("src",data.img);
+			$("#pseronBigImg").prop("src",data.img);
+			$("#name").val(data.name);
+			$("#sex").val(data.sex);
+			$("#birthday").val(data.birthday);
+			$("#signature").val(data.signature);
+			$("#panghu").html(data.name+'<img src="'+data.img+'" style="height:100px;width:130px;"/><button style="color:black;width:85%" onclick="perosnExist()">退出</buttion>');
+			if(data.sex=="女"){
+				if($("#boyorgirl").hasClass("boy"))
+					$("#boyorgirl").removeClass("boy")
+				$("#boyorgirl").addClass("girl")
+			}else{
+				if($("#boyorgirl").hasClass("girl"))
+					$("#boyorgirl").removeClass("girl")
+				$("#boyorgirl").addClass("boy")
+			}
+		}
+	});
+}
+
+function goAjax(){
+//ajax这个怪物要配合这个才能过滤 判断是否登录进行请求
+$(document).ajaxComplete(function(event, xhr, settings) {
+	// 从http头信息取出 在filter定义的sessionstatus，判断是否是 timeout
+	if (xhr.getResponseHeader("sessionstatus") == "timeout") {
+		// 从http头信息取出登录的url ＝ loginPath
+		if (xhr.getResponseHeader("loginPath")) {
+			alert("您未登录，请重新登陆!");
+			// 打会到登录页面
+			window.location.replace(xhr.getResponseHeader("loginPath"));
+		} else {
+			alert("请求超时请重新登陆 !");
+		}
+	}
+});}

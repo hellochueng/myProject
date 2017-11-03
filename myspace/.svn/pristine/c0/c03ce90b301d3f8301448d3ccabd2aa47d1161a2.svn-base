@@ -1,0 +1,15 @@
+package groupthree.myspace.bean;
+
+import java.util.List;
+
+public class imgLog {
+	private Integer id;
+	private String imgLog_content;
+	private String create_time;
+	private Integer is_delete;
+	private Integer permission;
+	
+	private List<logImg> logImg_list;
+	private List<logLiker> logLiker_list;
+	
+}

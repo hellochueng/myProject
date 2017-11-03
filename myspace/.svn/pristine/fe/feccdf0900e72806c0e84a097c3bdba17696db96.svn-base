@@ -1,0 +1,5 @@
+function personlogin(){
+	$("#username").val();
+	$("#password").val();
+	
+}

@@ -1,0 +1,31 @@
+/**
+ * 
+ */
+package groupthree.myspace.lhf.mapper;
+
+import groupthree.myspace.lhf.bean.LHFImgLog;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
+/**
+ * @author 罗会峰
+ *
+ */
+public interface ImgLogMapper {
+	
+	//查询没有删除的的说说
+//	@Select("select id,person_id,imglog_content,create_time,is_delete,permission from imglog where is_delete=#{is_delete} order by id asc")
+	List<LHFImgLog> getImgLogAll(@Param("is_delete")Integer is_delete);
+	
+	//写说说
+	int addImgLog(LHFImgLog imglog);
+	
+	//删除说说,其实是修改该表中的is_delete字段使其变为非0数即代表被删除
+	int deleteImgLog(@Param("is_delete")Integer is_delete,@Param("id")Integer id);
+	
+	//修改说说查看权限
+	int changePermission(@Param("permission")Integer permission,@Param("id")Integer id);
+}

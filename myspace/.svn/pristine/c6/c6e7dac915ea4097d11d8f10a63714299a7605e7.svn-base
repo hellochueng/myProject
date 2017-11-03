@@ -1,0 +1,26 @@
+var msg2="";
+function zmhSetAldum(){
+	 $.get("/myspace/zmhperson/showAldum",{},function(data){
+			var items=$.parseJSON(data)
+			
+			for(var i=0;i<items.length;i++){
+			  msg2+='<div class="image-box"><div class="photo-cover"><img src="all/aldum_images/beauty_girl.jpg" width="166px" height="106px" /><p class="photo-name"><a href="javascript:getPicture('+items[i].id+')" >'+items[i].aldumName+'</a><br>'+items[i].create_time+'</p></div></div>&nbsp;&nbsp;&nbsp;'	
+			}
+			$("#Allaldum").html(msg2)
+		})
+}
+function getPicture(id){
+	 $.get("/myspace/zmhperson/showPicture",{"id":id},function(data){
+			
+  	   var pictures=$.parseJSON(data)
+  	   $("#aldum").html("")
+  	   var msg=""
+  	   for(var i=0;i<pictures.length;i++){	
+  		   msg+='<div class="image-box"><div class="photo-cover"><a href=zmh/aldumImg/'+pictures[i].picture+'.jpg  class="big-image"><img src="aldumImg/'+pictures[i].picture+'.jpg" width="166px" height="106px" /><p class="photo-name">'+pictures[i].create_time+'</p></div></div>'		    	    
+  	   }
+  	 $("#Allaldum").html(msg)
+  	 
+	 })	    	
+	
+}
+

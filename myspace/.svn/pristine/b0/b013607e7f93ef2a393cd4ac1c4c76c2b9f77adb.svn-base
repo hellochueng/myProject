@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>My Space</title>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href='https://fonts.useso.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.useso.com/css?family=Lato:400,900,700,300,100' rel='stylesheet' type='text/css'>
+<link href='https://fonts.useso.com/css?family=Roboto+Slab:400,700,300,100' rel='stylesheet' type='text/css'>
+<script src="https://ajax.useso.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+
+<body>
+<div class="header">
+	<div class="container">
+    	<div class="row">
+        	<div class="col-md-12 col-sm-12 col-xs-12">
+            	<div class="logo pull-left col-md-6 col-sm-6 col-xs-12">
+                	<h1>My Space</h1>
+                </div>
+               
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+            	<div class="main-title text-center">
+                	<h2>My Space</h2>
+                    <p>Space是由我们小组五个人历经半个月的时间共同开发出来，该项目是模仿QQ空间来进行开发的。总共分为五个模块，包括说说模块、相册模块、留言板模块、好友聊天模块和登陆注册模块。</p>
+                    <div id="countdown" data-wow-delay=".3s" data-date="Dec 26, 2015 06:00:00"></div>
+                    <a href="http://localhost:8080/myspace/lzz/loginOrRegister.html" class="subscribe-tag page-scroll">登陆与注册</a>
+                </div>
+                
+                	
+            </div>
+        </div>
+    </div>
+</div>
+<div class="about text-center">
+	<div class="container">
+    	<div class="row">
+        	<div class="col-md-12">
+            	<div class="title">
+                	<h3>关于我们</h3>
+                </div>
+                <div class="desc">
+                	<p>我们小组成员包括组长赖漳州同学，组员张菲利同学、扈嘉楠同学、郑敏华同学和罗会峰同学。</p>
+                </div>
+            </div>
+            <div class="featurebox col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+            	<div class="feature text-left">
+                	<h4>我们的流程</h4>
+                    <p>我和同学都有非常忙碌的父亲。同学：爸爸，你一天赚多少钱呀？父亲：大概1200元吧，怎么了？同学：爸爸，这是我存很久的1200元，今天可以陪我一天吗？父亲红了眼眶，父子相拥而泣。我听了之后，也决定效仿同学。我：爸，你一天赚多少钱呀？爸爸：十万左右吧，怎么了？我：没事啊。。。。我就随便问问。。。。</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+            	<div class="feature text-left">
+                	<h4>我们的愿景</h4>
+                    <p>我和同学都有非常忙碌的父亲。同学：爸爸，你一天赚多少钱呀？父亲：大概1200元吧，怎么了？同学：爸爸，这是我存很久的1200元，今天可以陪我一天吗？父亲红了眼眶，父子相拥而泣。我听了之后，也决定效仿同学。我：爸，你一天赚多少钱呀？爸爸：十万左右吧，怎么了？我：没事啊。。。。我就随便问问。。。。</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+            	<div class="feature text-left">
+                	<h4>我们的方法</h4>
+                    <p>我和同学都有非常忙碌的父亲。同学：爸爸，你一天赚多少钱呀？父亲：大概1200元吧，怎么了？同学：爸爸，这是我存很久的1200元，今天可以陪我一天吗？父亲红了眼眶，父子相拥而泣。我听了之后，也决定效仿同学。我：爸，你一天赚多少钱呀？爸爸：十万左右吧，怎么了？我：没事啊。。。。我就随便问问。。。。</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+            	<div class="feature text-left">
+                	<h4>我们的目标</h4>
+                    <p>我和同学都有非常忙碌的父亲。同学：爸爸，你一天赚多少钱呀？父亲：大概1200元吧，怎么了？同学：爸爸，这是我存很久的1200元，今天可以陪我一天吗？父亲红了眼眶，父子相拥而泣。我听了之后，也决定效仿同学。我：爸，你一天赚多少钱呀？爸爸：十万左右吧，怎么了？我：没事啊。。。。我就随便问问。。。。</p>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer" id="footer">
+	<div class="container">
+    	<div class="row">
+        	<div class="col-md-12">
+        	<div class="footer-title text-center">
+            	<h3>注册我们，说不定下一秒脱单的就是你了！</h3>
+                <p>在我们的网站上获得最新的好友动态与信息，及时的与好友进行互动。</p>
+            </div>
+            <div class="subscribeform">
+            	<form class="subscribe_form" action="#" method="post">
+	                <input required value="" placeholder="输入你的邮箱..." class="email" id="email" name="email" type="email">
+	                <input class="subscribe" name="email" value="订阅!" type="submit">
+	            </form>
+            </div>
+            
+             </div>
+             <div class="col-md-12 text-center footer-line">
+             	<p>版权 &copy; 2017.项目名称保留所有权利。<a target="_blank" href="http://sc.chinaz.com/moban/">登陆与注册</a></p>
+             </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.countdown.min.js"></script>
+<script type="text/javascript">
+if ($('#countdown').length) { 
+			$('#countdown').countdown({
+				render: function(data) {
+					if (data.years >= 1) {
+						var $days =	(data.years*365)+data.days;
+					} else {
+						var $days = data.days;
+					}
+				  $(this.el).html(
+					  '<div class="day">' + this.leadingZeros($days) + ' <span>Days</span></div>'+
+					  '<div class="hour">' + this.leadingZeros(data.hours, 2) + ' <span>Hours</span></div>'+
+					  '<div class="min">' + this.leadingZeros(data.min, 2) + ' <span>Minutes</span></div>'+
+					  '<div class="sec">' + this.leadingZeros(data.sec, 2) + ' <span>Seconds</span></div>'
+				  );
+				}
+			});
+		}
+
+</script>
+</body>
+</html>

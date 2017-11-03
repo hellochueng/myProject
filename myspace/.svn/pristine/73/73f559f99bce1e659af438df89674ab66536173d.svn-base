@@ -1,0 +1,93 @@
+body {
+	padding: 0;
+	margin: 0;
+	font-size: 12px;
+	font-family: 'Microsoft yahei';
+}
+
+.addFriendView {
+	background:none;
+	margin-top:10%;
+	margin-left: 25%;
+	width: 800px;
+	height: 300px;
+	background-color: #28A4C9;
+}
+
+.addView {
+	margin-left: 20px;
+	margin-top: 20px;
+	padding: 0;
+	list-style-type: none;
+	background-color: white;
+	float: left;
+	border-radius: 10px;
+}
+
+.addView:after {
+	content: '';
+	clear: both;
+	display: block;
+}
+
+.addView li {
+	float: left;
+	transition: all .2s;
+	width: 200px;
+	height: 200px;
+	border-right: 1px solid #ccc;
+	box-sizing: border-box;
+	padding: 10px;
+}
+
+.addView li h2 {
+	font-size: 20px;
+	text-align: center;
+}
+
+.addView li h3 {
+	font-size: 18px;
+	text-align: center;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 10px;
+}
+
+.addView li a {
+	display: block;
+	width: 90%;
+	margin: 10px auto;
+	text-align: center;
+	background: #DA6D0E;
+	border-radius: 10px;
+	transition: all .5s;
+	position: relative;
+	padding: 20px 0;
+	text-decoration: none;
+	color: #fff;
+}
+
+.addView li a span {
+	display: block;
+}
+
+.addView li a:hover {
+	box-shadow: 0px 1px 10px rgba(0, 0, 0, .8);
+}
+
+.addView li p {
+	text-align: center;
+	color: #111;
+}
+
+.addView li:nth-child(4) {
+	border-right: none;
+}
+
+.addView li:hover {
+	box-shadow: 0px 4px 20px rgba(0, 0, 0, .3);
+	border-radius: 10px;
+	transform: scale(1.1);
+	-webkit-transform: scale(1.1);
+	border: none;
+	background: #fff;
+}

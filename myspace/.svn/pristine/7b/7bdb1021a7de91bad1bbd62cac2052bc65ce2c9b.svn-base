@@ -1,0 +1,60 @@
+jQuery(document).ready(function(){
+	setTopNav();
+	setName();
+	showImgLog();
+});
+
+function setTopNav(){
+	var navBody='<div class="navigation-up"><div class="navigation-inner" ><div class="navigation-v3" ><ul >';
+	navBody+='<li class="nav-up-selected-inpage" _t_nav="home"><h2><a style="font-size: 18px;"><img class="personImg" src="all/images/myspace2.png">myspace</a></h2></li>';
+	navBody+='<li class="selectNav" _t_nav="product"><h2><a href="#"><div id="friendTrends"></div>好友动态</a></h2></li>';
+	navBody+='<li class="" _t_nav="wechat"><h2><a href="#"><div id="findFriend"></div>找朋友?</a></h2></li>';
+	navBody+='<li><h2><a href="#" style="width: 400px;"></a></h2></li>';
+	navBody+='<li class="" _t_nav="cooperate"><h2><a href="#" class="tooltips" tooltip="" tooltip-position="bottom"><span>';
+	navBody+='<img src="all/images/w6.jpg">我是胖虎</span><img class="personImg" src="all/images/w6.jpg" /><font id="SmallPersonName">个人姓名</font></a></h2></li>';
+	navBody+='<li _t_nav="support" "><h2><a href="#">帮助与支持</a></h2></li>';
+	navBody+='</ul></div></div></div>';
+	$(".head-v3").html(navBody);
+}
+
+function setName(){
+	$.ajax({
+		url:"/myspace/personAction/setPersonInfo",
+		async:false,
+		dataType:"json",
+		success:function(data){
+			$("#SmallPersonName").html(data.name);
+			$("#BigPersonName").html(data.name);
+		}
+	});
+}
+
+function showFriends(){
+	$("#chat").prevAll().hide();
+	$.ajax({
+		type:"get",
+		async:false,
+		url:"/myspace/friendAction/setFriendList",
+		dataType:"json",
+		success:function(data){
+			$("#chatFriend").text(data[0].remark);
+			var list = '';
+			for(var i=0;i<data.length;i++){
+				//alert(data[i].remark);
+				list+='<li class="active"><img class="avatar" width="30"';
+				list+='height="30" alt="示例介绍" src="all/img/1_copy.jpg">';
+				list+='<p class="'+data[i].remark+'">示例介绍</p></li>';
+			}
+			$("#friendList").html(list);
+		}
+	});
+	$("#chat").fadeIn('slow');
+}
+
+function showImgLog(){
+	$("#chat").hide();
+	
+	
+	$("#ImgLog").fadeIn('2000');
+	
+}

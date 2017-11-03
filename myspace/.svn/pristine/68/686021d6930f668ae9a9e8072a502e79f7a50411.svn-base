@@ -1,0 +1,13 @@
+function setTopNav() {
+	var navBody = '<div class="navigation-up"><div class="navigation-inner" ><div class="navigation-v3" ><ul >';
+	navBody += '<li class="nav-up-selected-inpage" ><h2><a style="font-size: 18px;" href="mainView.html"><img class="personImg" src="all/images/myspace2.png">myspace</a></h2></li>';
+	navBody += '<li class="selectNav" ><h2><a href="#"><div id="friendTrends"></div>好友动态</a></h2></li>';
+	navBody += '<li class=""><h2><a href="findNewFriend.html"><div id="findFriend"></div>找朋友?</a></h2></li>';
+	navBody += '<li><h2><a href="#" style="width: 400px;"></a></h2></li>';
+	navBody += '<li class="" ><h2>';
+	navBody += '<img class="personImg" id="sPersonImg" src="all/images/w6.jpg" />';
+	navBody += '<a href="mainView.html" style="padding-left: 0px"><font class="username" style="color:white;margin: 0;padding: 0;border: 0;font-size: 100%;font: inherit;vertical-align: baseline;">个人姓名</font></a></h2></li>';
+	navBody += '<li ><h2><a href="../lhf/introduce.html">关于我们</a></h2></li>';
+	navBody += '</ul></div></div></div>';
+	$(".head-v3").html(navBody);
+}

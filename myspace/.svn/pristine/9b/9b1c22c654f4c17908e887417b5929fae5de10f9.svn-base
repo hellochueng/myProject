@@ -1,0 +1,6 @@
+.image-box { background-image: none; }
+.user-box { background-image: none; }
+h1#logo a { background-image: none; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='css/images/logo.png', sizingMethod='image'); }
+.box-holder { height: 100%; }
+.image-box .box-holder { background-image: none; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='css/images/image-box.png', sizingMethod='image'); }
+.user-box .box-holder { background-image: none; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='css/images/user-box.png', sizingMethod='image'); }

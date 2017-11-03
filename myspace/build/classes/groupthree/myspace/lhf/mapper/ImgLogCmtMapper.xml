@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:今天不能随便写,必须和接口的完全限定名保持一致 -->
+<mapper namespace="groupthree.myspace.lhf.mapper.ImgLogCmtMapper">
+	<!-- 查看所有未被删除的说说评论，is_delete默认为0是没有删除即可被用户查看到的 -->
+	<select id="getImgLogCmts" resultType="lhfilcmt">
+		select * from imglogcmt where is_delete=#{is_delete}
+	</select>
+	
+	<!-- 评论好友说说进行评论 -->
+	<insert id="addImgLogCmt">
+		insert into imglogcmt values(#{id},#{imglog_id},#{friend_id},#{comment_content},to_date(#{create_time},'YYYY-MM-DD HH24:MI:SS'),#{is_delete})
+	</insert>
+	
+	<!-- 删除好友的说说评论，即修改is_delete字段为非0数时即代表被删除此时用户不可见 -->
+	<update id="deleteImgLogCmt">
+		update imglogcmt set is_delete=#{is_delete} where id=#{id}
+	</update>
+</mapper>

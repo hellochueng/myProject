@@ -1,0 +1,30 @@
+package groupthree.myspace.zmh.test;
+
+
+import groupthree.myspace.bean.aldum;
+import groupthree.myspace.zmh.mapper.PsMapper;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class Test {
+   public static void main(String[] args) {
+	    ApplicationContext context=new ClassPathXmlApplicationContext("spring.xml");
+	    SqlSession sqlSession=context.getBean(SqlSession.class);
+		PsMapper mapper=sqlSession.getMapper(PsMapper.class);
+//		System.out.println(mapper.login(111222,111));	
+//		System.out.println("--------------------------------");
+//		System.out.println(mapper.getAldumAllByPersonId(1002));
+//		System.out.println("--------------------------------");
+//		System.out.println(mapper.getPictureByAldumId(1));
+//		System.out.println("--------------------------------");
+//		System.out.println(mapper.getImgLogByPersonId(1001));
+//		System.out.println("--------------------------------");
+	//	System.out.println(mapper.getFriendsByPersonId(1002));
+	//	System.out.println(mapper.addPictureInAldum(new picture(8,"tiger",0,"2017-9-8",0,2)));
+  
+      System.out.println(mapper.addNewAldum(new aldum(9, "2017-9-8",0,0, "胖虎表情包系列", 1001))) ;
+   }
+}
+

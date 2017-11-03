@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:必须和接口的完全限定名保持一致 -->
+<mapper namespace="groupthree.myspace.lzz.mapper.LzzPerson_Mapper">
+	<select id="personLogin" resultType="person" >
+		select * from person where space=#{space} and pwd=#{pwd}
+	</select>
+	
+	<select id="getPersonAll" resultType="person">
+		select * from person  where id not in 
+		(select person_id from friendapply where apply_id=#{id}) and 
+		id not in (select id from friend where person_id=#{id}) and id!=#{id} order by create_time desc
+	</select>
+	
+	<insert id="personRegister" useGeneratedKeys="true" keyProperty="id">
+		<selectKey resultType="int" order="BEFORE" keyProperty="id">
+			select PERONSEQ.nextVal from dual
+		</selectKey>
+			insert into PERSON(id,space,name,pwd,sex,img,signature,create_time) values(
+				#{id},#{space},#{name},
+				#{pwd},#{sex},#{img},#{signature},
+				to_date(#{create_time},'YYYY-MM-DD')
+			)
+	</insert>
+	
+	<update id="changePersonInfo" parameterType="person">
+		update person set name = #{name},sex=#{sex},
+		birthday=to_date(#{birthday},'YYYY-MM-DD'),
+		signature=#{signature},img=#{img} where id=#{id}
+	</update>
+	
+	<insert id="applyFriend" parameterType="friendapply" useGeneratedKeys="true" keyProperty="id">
+		<selectKey resultType="int" order="BEFORE" keyProperty="id">
+		select APPLYFRIENDSEQ.nextVal from dual
+		</selectKey>
+		insert into friendapply values(
+			#{id},#{apply_id},#{person_id},
+			#{situation},to_date(#{create_time},'YYYY-MM-DD HH24:MI:SS')
+			,#{is_delete}
+		)
+	</insert>
+	
+	<select id="getAllApply" resultType="friendapply">
+		select p.name as "apply_name",f.* from person p,friendapply f where f.is_delete=0 and p.id=f.apply_id order by f.create_time desc
+	</select>
+	
+	<select id="isSendApply" resultType="int" parameterType="friendapply">
+		select count(apply_id) from friendapply where
+		apply_id = #{apply_id} and person_id =#{person_id} 
+		and is_delete=#{is_delete} and situation=#{situation}
+	</select>
+	
+	
+	 <select id="getPersonImgLog" resultType="imgLog">
+		select i.*,p.name from imglog i,person p where i.person_id=#{id} and p.is_delete=0 and p.id=i.person_id order by i.create_time desc
+	</select>
+	
+	<select id="getImgLogCmt" resultType="imgLogCmt">
+		select p.name,p.img,i.* from IMGLOGCMT i,person p where i.IMGLOG_ID=#{id} and p.id=i.friend_id and i.is_delete=0 order by i.create_time desc 
+	</select>
+	
+	
+	<select id="getLikers" resultType="logliker">
+		select i.*,p.name from IMGLOGLIKER i,person p where IMGLOG_ID=#{id} and p.id=i.friend_id and i.is_delete=0 order by i.create_time desc
+	</select>
+	
+	<insert id="addLog" parameterType="imgLog" useGeneratedKeys="true" keyProperty="id">
+		<selectKey resultType="int" order="BEFORE" keyProperty="id" >
+		select imgLogSEQ.nextVal from dual
+		</selectKey>
+		insert into imglog values(
+			#{id},#{person_id},#{imgLog_content}
+			,to_date(#{create_time},'YYYY-MM-DD HH24:MI:SS'),
+			#{is_delete}
+			,#{permission},#{imgSrc}
+		)
+	</insert>
+	
+	<update id="deleteLog">
+		update imgLog set is_delete = 1 where id=#{id}
+	</update>
+	
+	<select id="IsLiker" parameterType="logliker" resultType="logliker">
+		select * from imgLogliker where imglog_id=#{imgLog_id} and friend_id=#{friend_id}
+	</select>
+	
+	<insert id="addLogLiker" parameterType="logliker" useGeneratedKeys="true" keyProperty="id">
+		<selectKey resultType="int" order="BEFORE" keyProperty="id">
+		select imgLoglikerSEQ.nextVal from dual
+		</selectKey>
+		insert into imglogliker values(#{id},
+		#{imgLog_id},
+		#{friend_id}
+		,to_date(#{create_time},'YYYY-MM-DD'),
+		#{is_delete}
+		)
+	</insert>
+	
+	<update id="likeLog">
+		update imgLogliker set is_delete = #{is_delete} where id=#{id}
+	</update>
+	
+	<insert id="sendCmt" parameterType="imglogcmt" useGeneratedKeys="true" keyProperty="id">
+		<selectKey resultType="int" order="BEFORE" keyProperty="id" >
+		select logcmtSEQ.nextVal from dual
+		</selectKey>
+		insert into imglogcmt values(#{id},#{imgLog_id},#{friend_id},#{comment_content},
+		to_date(#{create_time},'YYYY-MM-DD'),0)
+	</insert>
+</mapper>

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>MySpace</title>
+<link rel="stylesheet" href="all/css/bootstrap.css" />
+<link rel="stylesheet" href="all/css/bootstrap-theme.min.css" />
+<link href="all/css/MainStyle.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="all/css/tipStyle.css" />
+<link rel="stylesheet" href="all/css/topNav.css" />
+<script src="all/js/jquery-3.2.1.js"></script>
+<script src="all/js/topNav.js"></script> 
+<script src="all/js/socialupdate.js"></script> 
+ <style type="text/css">
+ 	body{ text-align:center} 
+	#divlower{ 
+		width: 1200px; 
+		height:800px;
+		margin-left: 300px;
+		margin-top: 50px;
+	} 
+ </style>
+</head>
+<body>
+	<!-- 顶部栏 -->
+	<div class="head-v3"></div>
+	
+	<!-- 下面 -->
+	<div id="divlower" style="margin-left: 25%;margin-top: 17%">
+		<div class="cont"  id="showImgLog"  style="height:auto;width: auto;">
+		</div>
+	</div>
+</body>
+</html>
+

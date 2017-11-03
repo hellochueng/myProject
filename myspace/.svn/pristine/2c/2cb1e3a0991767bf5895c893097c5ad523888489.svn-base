@@ -1,0 +1,29 @@
+package groupthree.myspace.lzz.controller;
+
+import groupthree.myspace.bean.person;
+import groupthree.myspace.lzz.service.LzzFriendService;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
+
+
+@Controller(value="LzzFriendController")
+@RequestMapping(value="/friendAction",produces="text/plain;charset=utf-8")
+public class LzzFriendController {
+	@Resource(name="LzzFriendService")LzzFriendService lzzFriendService;
+	Gson gson = new Gson();
+	
+	@RequestMapping(value="/setFriendList")
+	@ResponseBody
+	public String setFriendList(HttpServletRequest request){
+		person person = (person)request.getSession().getAttribute("user");
+		return gson.toJson(lzzFriendService.getFriendAll(person.getId()));
+	}
+
+}

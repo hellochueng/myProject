@@ -1,0 +1,15 @@
+.aldum{
+	display: none; 
+	height: 700px; 
+	width: 1000px;
+	border-radius: 15px;
+	background: #333366;
+}
+
+.Info{
+	display: none; 
+	height: 700px; 
+	width: 800px;opacity: 0.9;
+	border-radius: 15px;
+	background: #333366;
+}

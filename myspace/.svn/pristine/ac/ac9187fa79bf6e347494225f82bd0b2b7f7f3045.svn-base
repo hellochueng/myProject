@@ -1,0 +1,31 @@
+jQuery(document).ready(function(){
+	var navBody='<div class="navigation-up"><div class="navigation-inner" ><div class="navigation-v3" ><ul >';
+	navBody+='<li class="nav-up-selected-inpage" _t_nav="home"><h2><a style="font-size: 18px;"><img class="personImg" src="all/images/myspace2.png">myspace</a></h2></li>';
+	navBody+='<li class="selectNav" _t_nav="product"><h2><a href="#"><div id="friendTrends"></div>好友动态</a></h2></li>';
+	navBody+='<li class="" _t_nav="wechat"><h2><a href="#"><div id="findFriend"></div>找朋友?</a></h2></li>';
+	navBody+='<li><h2><a href="#" style="width: 400px;"></a></h2></li>';
+	navBody+='<li class="" _t_nav="cooperate"><h2><a href="#" class="tooltips" tooltip="" tooltip-position="bottom"><span>';
+	navBody+='<img src="all/images/w6.jpg">我是胖虎</span><img class="personImg" src="all/images/w6.jpg" />个人姓名</a></h2></li>';
+	navBody+='<li _t_nav="support" "><h2><a href="#">帮助与支持</a></h2></li>';
+	navBody+='</ul></div></div></div>';
+	$(".head-v3").html(navBody);
+
+	var qcloud={};
+	$('[_t_nav]').hover(function(){
+		var _nav = $(this).attr('_t_nav');
+		clearTimeout( qcloud[ _nav + '_timer' ] );
+		qcloud[ _nav + '_timer' ] = setTimeout(function(){
+		$('[_t_nav]').each(function(){
+		$(this)[ _nav == $(this).attr('_t_nav') ? 'addClass':'removeClass' ]('nav-up-selected');
+		});
+		$('#'+_nav).stop(true,true).slideDown(200);
+		}, 150);
+	},function(){
+		var _nav = $(this).attr('_t_nav');
+		clearTimeout( qcloud[ _nav + '_timer' ] );
+		qcloud[ _nav + '_timer' ] = setTimeout(function(){
+		$('[_t_nav]').removeClass('nav-up-selected');
+		$('#'+_nav).stop(true,true).slideUp(200);
+		}, 150);
+	});
+});

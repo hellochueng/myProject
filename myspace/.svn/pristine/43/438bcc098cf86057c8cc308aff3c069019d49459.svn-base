@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:必须和接口的完全限定名保持一致 -->
+<mapper namespace="groupthree.myspace.zfl.mapper.PersonMapper">
+	<!-- 登入验证 -->
+	<select id="selectPersonByNameAndPwd" parameterType="String" resultType="person">
+		select p.name,p.pwd from person p where p.name=#{name} and p.pwd=#{pwd}
+	</select>
+	
+	<!-- 查询所有用户 -->
+	<select id="selectPerson" resultType="person">
+		select p.* from person p
+	</select>
+	
+	<!--查询说说  -->
+	<select id="selectImgLog" resultType="imglog">
+		select i.*,p.name from imglog i,person p where i.friend_id=p.id 
+	</select>
+	
+	<!--查询用户说说图片  -->
+	<select id="selectLogImg" parameterType="int" resultType="logimg">
+		select l.* from logimg l,imglog i where l.logimg_id=i.id and i.id=#{id}
+	</select>
+	
+	<!--查询用户说说评论  -->
+	<select id="selectImgLogCmt" parameterType="int" resultType="imglogcmt">
+		select l.* from imglog i,imglogcmt l where i.id=l.imglog_id and i.id=#{id} 
+	</select>
+	
+	<!--查询说说点赞好友  -->
+	<select id="selectImgLogLiker" parameterType="int" resultType="logliker">
+		select p.name from person p,imglog i,imglogliker l where p.id=l.liker_id and i.id=l.imglog_id and i.id=#{id}
+	</select>
+	
+	<!--查询用户好友  -->
+	<select id="selectFriend" parameterType="int" resultType="friend">
+		select f.remark from friend f,person p where id=#{id}
+	</select>
+	
+	<!--查询用户相册图片  -->
+	<select id="selectPicture" parameterType="int" resultType="picture">
+		select p.picture from picture p,aldum a where a.id=p.aldum_id and a.id=#{id}
+	</select>
+	
+	<!--查询用户相册  -->
+	<select id="selectAldum" parameterType="int" resultType="aldum">
+		select a.* from aldum a,person p where a.person_id=p.id and p.id=#{id}
+	</select>
+	
+	<!--查询聊天记录  -->
+	<select id="selectChatLog" parameterType="int" resultType="chatLog">
+		select p2.name,c.content,c.create_time,c.is_delete from chatlog c,person p1,person p2 where p1.id=c.sender_id and p2.id=c.getter_id and p1.id=#{id} 
+	</select>
+	
+</mapper>

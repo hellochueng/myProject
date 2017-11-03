@@ -1,0 +1,42 @@
+/**
+ * 
+ */
+package groupthree.myspace.lhf.dao.impl;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+import groupthree.myspace.lhf.bean.LHFImgLogLiker;
+import groupthree.myspace.lhf.dao.BaseDao;
+import groupthree.myspace.lhf.dao.ImgLogLikerDao;
+import groupthree.myspace.lhf.mapper.ImgLogLikerMapper;
+
+/**
+ * @author 罗会峰
+ *
+ */
+@Repository(value = "ImgLogLikerDaoImpl")
+//@Repository
+public class ImgLogLikerDaoImpl extends BaseDao implements ImgLogLikerDao {
+
+	@Override
+	//查询所有is_delete为0即代表未删除的所有点赞
+	public List<LHFImgLogLiker> getImgLogLikers(Integer is_delete) {
+		return getMapper(ImgLogLikerMapper.class).getImgLogLikers(is_delete);
+	}
+
+	@Override
+	// 对好友说说进行点赞
+	public int addImgLogLiker(LHFImgLogLiker imglogliker) {
+		return getMapper(ImgLogLikerMapper.class).addImgLogLiker(imglogliker);
+	}
+
+	@Override
+	//删除好友对说说点赞，即修改is_delete字段为非0数时即代表被删除，此时用户不可见
+	public int deleteImgLogLiker(Integer is_delete, Integer id) {
+		return getMapper(ImgLogLikerMapper.class).deleteImgLogLiker(is_delete, id);
+	}
+
+}

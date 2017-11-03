@@ -1,0 +1,73 @@
+package groupthree.myspace.bean;
+
+import org.apache.ibatis.type.Alias;
+import org.springframework.stereotype.Component;
+
+/**
+ * 
+ * @author lzz
+ * 相册图片实体类
+ */
+@Component
+@Alias("picture")
+public class picture {
+	private Integer id;
+	//图片路径
+	private String picture;
+	//是否删除 判断是否显示
+	private Integer is_delete;
+	//创建时间
+	private String create_time;
+	//权限 0公开 1好友可见 2自己可见
+	private Integer permission;
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getCreate_time() {
+		return create_time;
+	}
+	public void setCreate_time(String create_time) {
+		this.create_time = create_time;
+	}
+	public String getPicture() {
+		return picture;
+	}
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+	public Integer getIs_delete() {
+		return is_delete;
+	}
+	public void setIs_delete(Integer is_delete) {
+		this.is_delete = is_delete;
+	}
+	public Integer getPermission() {
+		return permission;
+	}
+	public void setPermission(Integer permission) {
+		this.permission = permission;
+	}
+	@Override
+	public String toString() {
+		return "picture [id=" + id + ", create_time=" + create_time
+				+ ", picture=" + picture + ", is_delete=" + is_delete
+				+ ", permission=" + permission + "]";
+	}
+	public picture(Integer id, String create_time, String picture,
+			Integer is_delete, Integer permission) {
+		super();
+		this.id = id;
+		this.create_time = create_time;
+		this.picture = picture;
+		this.is_delete = is_delete;
+		this.permission = permission;
+	}
+	public picture() {
+		super();
+	}
+	
+}

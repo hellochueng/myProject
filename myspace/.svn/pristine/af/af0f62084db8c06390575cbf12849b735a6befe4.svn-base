@@ -1,0 +1,28 @@
+package groupthree.myspace.zfl.service.imp;
+
+import groupthree.myspace.bean.person;
+import groupthree.myspace.zfl.dao.IPersonDao;
+import groupthree.myspace.zfl.service.IPersonService;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+@Service(value="zflPersonServiceImp")
+public class PersonServiceImp implements IPersonService {
+
+	
+	@Resource(name="PersonDaoImp")IPersonDao dao;
+	
+	@Override
+	public List<person> selectPerson() {
+		// TODO Auto-generated method stub
+		return dao.selectPerson();
+	}
+	public person selectPersonByNameAndPwd(String name,String pwd){
+		return dao.selectPersonByNameAndPwd(name, pwd);
+	}
+
+}

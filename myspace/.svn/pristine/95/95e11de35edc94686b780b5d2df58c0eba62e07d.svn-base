@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:必须和接口的完全限定名保持一致 -->
+<mapper namespace="groupthree.myspace.zmh.mapper.PsMapper">
+	<select id="login" resultType="person">
+		select * from person where space=#{space} and pwd=#{password}
+	</select>
+	<select id="getAldumAllByPersonId" resultType="aldum">
+	   select * from aldum where person_id in(select id from person where id=#{id})
+	</select>
+	
+	<select id="getPictureByAldumId" resultType="picture">
+	   select * from picture where aldum_id in(select id from aldum where id=#{id})
+	</select>
+	
+	<select id="getImgLogByPersonId" resultType="imglog">
+	   select * from imglog where person_id in(select id from person where id=#{id})order by create_time desc
+	</select>
+	
+	<select id="getFriendsByPersonId" resultType="friend">
+	   select * from friend where person_id in(select id from person where id=#{id})
+	</select>
+	<insert id="addPictureInAldum"  parameterType="picture" keyProperty="id" useGeneratedKeys="true">
+	   <selectKey order="BEFORE" keyProperty="id" resultType="int">
+	   		select pictureseq.nextVal from dual
+	   </selectKey>
+	   insert into picture values(#{id},#{aldum_id},to_date(#{create_time},
+			'YYYY-MM-DD HH24:MI:SS'),#{picture},#{is_delete},#{permission})
+	</insert>
+	
+	<insert id="addNewAldum" parameterType="aldum" keyProperty="id" useGeneratedKeys="true">
+	  <selectKey order="BEFORE" keyProperty="id" resultType="int">
+	   		select aldumseq.nextVal from dual
+	   </selectKey>
+	   insert into aldum  values(#{id},#{person_id},to_date(#{create_time},
+			'YYYY-MM-DD HH24:MI:SS'),#{is_delete},#{permission},#{aldumName})
+	</insert>
+</mapper>

@@ -1,0 +1,9 @@
+package groupthree.myspace.lzz.service;
+
+import groupthree.myspace.bean.person;
+
+public interface LzzPersonService {
+	person login(person person);
+	boolean register(person person);
+	boolean changePersonInfo(person person);
+}

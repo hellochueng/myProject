@@ -1,0 +1,52 @@
+/**
+ * 
+ */
+package groupthree.myspace.lhf.dao.impl;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import groupthree.myspace.lhf.bean.ImgLog;
+import groupthree.myspace.lhf.dao.BaseDao;
+import groupthree.myspace.lhf.dao.ImgLogDao;
+import groupthree.myspace.lhf.mapper.ImgLogMapper;
+import groupthree.myspace.lhf.tools.DBTools;
+
+/**
+ * @author 罗会峰
+ *
+ */
+@Repository(value = "ImgLogDaoImpl")
+//@Repository
+public class ImgLogDaoImpl extends BaseDao implements ImgLogDao {
+	ImgLogMapper mapper=null;
+	@Override
+	//查询没有删除的的说说
+	public List<ImgLog> getImgLogAll(Integer is_delete) {
+		mapper=DBTools.getSqlSession().getMapper(ImgLogMapper.class);
+		return getMapper(ImgLogMapper.class).getImgLogAll(is_delete);
+	}
+
+	@Override
+	//写说说
+	public int addImgLog(ImgLog imglog) {
+		mapper=DBTools.getSqlSession().getMapper(ImgLogMapper.class);
+		return getMapper(ImgLogMapper.class).addImgLog(imglog);
+	}
+
+	@Override
+	//删除说说,其实是修改该表中的is_delete字段使其变为非0数即代表被删除
+	public int deleteImgLog(Integer is_delete, Integer id) {
+		mapper=DBTools.getSqlSession().getMapper(ImgLogMapper.class);
+		return getMapper(ImgLogMapper.class).deleteImgLog(is_delete, id);
+	}
+
+	@Override
+	//修改说说查看权限
+	public int changePermission(Integer permission, Integer id) {
+		mapper=DBTools.getSqlSession().getMapper(ImgLogMapper.class);
+		return getMapper(ImgLogMapper.class).changePermission(permission, id);
+	}
+	
+}

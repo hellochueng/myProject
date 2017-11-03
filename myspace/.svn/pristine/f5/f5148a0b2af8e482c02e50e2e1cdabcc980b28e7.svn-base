@@ -1,0 +1,38 @@
+package groupthree.myspace.lzz.service.serviceImpl;
+
+import groupthree.myspace.bean.chatLog;
+import groupthree.myspace.bean.friend;
+import groupthree.myspace.bean.person;
+import groupthree.myspace.lzz.dao.LzzFriendDao;
+import groupthree.myspace.lzz.service.LzzFriendService;
+import groupthree.myspace.lzz.service.LzzPersonService;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+@Service(value="LzzFriendService")
+public class LzzFriendServiceImpl implements LzzFriendService{
+	
+	@Resource(name="LzzFriendDao")LzzFriendDao lzzFriendDao;
+
+	@Override
+	public List<friend> getFriendAll(Integer id) {
+		return lzzFriendDao.getFriendAll(id);
+	}
+
+	@Override
+	public List<chatLog> getChatLog(Integer person_id, Integer friend_id) {
+		return lzzFriendDao.getChatLog(person_id, friend_id);
+	}
+
+	@Override
+	public int sendMessage(chatLog chat) {
+		return lzzFriendDao.sendMessage(chat);
+	}
+		
+}

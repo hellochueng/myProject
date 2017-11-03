@@ -1,0 +1,8 @@
+package groupthree.myspace.lzz.mapper;
+
+import groupthree.myspace.bean.person;
+
+public interface Person_Mapper {
+	person personLogin(person person);
+	int personRegister(person person);
+}

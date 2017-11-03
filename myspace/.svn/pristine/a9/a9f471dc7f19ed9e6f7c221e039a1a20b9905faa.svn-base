@@ -1,0 +1,40 @@
+package groupthree.myspace.hjn.mapper;
+
+import groupthree.myspace.bean.person;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+public interface HPersonMapper {
+	//显示用户通过id
+	int updatePersonById(@Param("id")int id,@Param("i")int i);
+	
+	//不显示说说
+	int updateImgLogById(@Param("id")int id);
+	
+	//不显示说说评论
+	int updateImgLogCmtById(@Param("id")int id);
+	
+	//不显示相册
+	int updateAldumById(@Param("id")int id);
+	
+	//不显示相片
+	int updatePictureById(@Param("id")int id);
+	
+	//不显示好友
+	int updateFriendById(@Param("id")int id);
+	
+	//更改用户昵称
+	int updatePersonNameById(@Param("id")int id,@Param("name")String name);
+	//更改用户密码
+	int updatePersonPwdById(@Param("id")int id,@Param("pwd")String pwd);
+	//更改用户性别
+	int updatePersonSexById(@Param("id")int id,@Param("sex")String sex);
+	//更改用户生日
+	int updatePersonBirById(@Param("id")int id,@Param("birthday")String birthday);
+	//更改用户头像
+	int updatePersonImgById(@Param("id")int id,@Param("img")String img);
+	//更改用户个性签名
+	int updatePersonSignById(@Param("id")int id,@Param("signature")String signature);
+}

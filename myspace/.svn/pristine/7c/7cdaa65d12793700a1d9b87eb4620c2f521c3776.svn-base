@@ -1,0 +1,66 @@
+$(function(){
+	goAjax();
+	setTopNav();
+	setName();
+	setAllFriend();
+	
+})
+
+function setAllFriend(){
+	
+	$.ajax({
+		type:"get",
+		url:"/myspace/personAction/getPersonAll.do",
+		async : false,
+		dataType:"json",
+		success:function(data){
+			var addFriend="";
+			if(data.length>0){
+				for(var i =0;i<data.length;i++){
+					addFriend+='<ul class="addView"><li>';
+					addFriend+='<img src="'+data[i].img+'" style="width: 50px;height: 50px;float: left">';
+					addFriend+='<h2 style="color: red;">'+data[i].name+'</h2>';
+					addFriend+='<h3>'+data[i].sex+'</h3>';
+					addFriend+='<p style="height: 50px;">'+data[i].signature;
+					addFriend+='</p><p><a href="javascript:add('+data[i].id+');"><span>加为好友</span></a>';
+					addFriend+='</p></li></ul>';
+				}
+			}
+			$(".addFriendView").html(addFriend);
+		}
+	})
+}
+
+function add(id){
+	swal({
+		  title: '添加好友',
+		  text: "是否选择添加好友，将不可逆的进行此操作",
+		  type: 'warning',   //感叹号图标
+		  showCancelButton: true,   //显示取消按钮
+		  confirmButtonColor: '#3085d6', //俩个按钮的颜色
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: '确定!', //俩个按钮的文本
+		  cancelButtonText: '取消!',
+		  confirmButtonClass: 'btn btn-success',  //俩个按钮的类样式
+		  cancelButtonClass: 'btn btn-danger',
+		}).then(function() {    //大部分，then是通用的回调函数
+			$.ajax({
+				url:"/myspace/personAction/applyFriend.do",
+				type:"get",
+				data:"friend_id="+id,
+				async : false,
+				success:function(data){
+					if(data=="ok")
+						 swal('请求成功','你的请求已发送','success');
+					else if(data=="no")
+						 swal('请求失败','你已经向该好友发送过请求','warning');
+					else swal('请求失败','不知道你做错了什么o(￣ヘ￣o＃)','error');
+				}
+			});
+		}, function(dismiss) {
+		  if (dismiss === 'cancel') {
+		    swal('取消','返回重新添加好友','error')
+		  }
+		})
+	
+}

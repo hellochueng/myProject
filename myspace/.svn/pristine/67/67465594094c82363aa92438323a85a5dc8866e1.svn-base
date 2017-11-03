@@ -1,0 +1,77 @@
+package groupthree.myspace.zmh.service.impl;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import groupthree.myspace.bean.aldum;
+import groupthree.myspace.bean.friend;
+import groupthree.myspace.bean.imgLog;
+import groupthree.myspace.bean.person;
+import groupthree.myspace.bean.picture;
+import groupthree.myspace.zmh.dao.PsDao;
+import groupthree.myspace.zmh.service.PsService;
+
+
+
+
+
+
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+//import org.springframework.stereotype.Service;
+//@Service(value="zmhPsServiceImpl")
+@Service(value="zmhPsServiceImpl")
+public class PsServiceImpl implements PsService{
+    @Resource(name="zmhPsDaoImpl")PsDao dao;
+	
+	//@Autowired
+	//PsDao dao;
+	
+	@Override
+	public person login(int space, int pwd) {
+		
+		if(dao.login(space, pwd)!=null){
+			return dao.login(space, pwd);
+		}
+		return null;
+	}
+
+	@Override
+	public List<aldum> getAldumAllByPersonId(int id) {
+		
+		return dao.getAldumAllByPersonId(id);
+	}
+
+	@Override
+	public List<picture> getPictureByAldumId(int id) {
+		
+		return dao.getPictureByAldumId(id);
+	}
+
+	@Override
+	public List<imgLog> getImgLogByPersonId(int id) {
+		
+		return dao.getImgLogByPersonId(id);
+	}
+
+	@Override
+	public List<friend> getFriendsByPersonId(int id) {
+		return dao.getFriendsByPersonId(id);
+	}
+
+	@Override
+	public int addPictureInAldum(picture picture) {
+		
+		return dao.addPictureInAldum(picture);
+	}
+
+	@Override
+	public int addNewAldum(aldum aldum) {
+		
+		return dao.addNewAldum(aldum);
+	}
+
+}

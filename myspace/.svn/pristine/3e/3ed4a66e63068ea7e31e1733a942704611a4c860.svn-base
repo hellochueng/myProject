@@ -1,0 +1,74 @@
+package groupthree.myspace.bean;
+
+import org.apache.ibatis.type.Alias;
+import org.springframework.stereotype.Component;
+
+/**
+ * 
+ * @author lzz
+ * 好友申请实体类
+ */
+
+@Component
+@Alias("friendapply")
+public class friendApply {
+	private Integer id;
+	//外键申请者id 对应person主键
+	private Integer apply_id;
+	//创建时间
+	private String create_time;
+	//处理情况 0未处理 1接受 2拒绝
+	private Integer situation;
+	//外键关联用户主键
+	private Integer person_id;
+	
+	
+	public Integer getPerson_id() {
+		return person_id;
+	}
+	public void setPerson_id(Integer person_id) {
+		this.person_id = person_id;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Integer getApply_id() {
+		return apply_id;
+	}
+	public void setApply_id(Integer apply_id) {
+		this.apply_id = apply_id;
+	}
+	public String getCreate_time() {
+		return create_time;
+	}
+	public void setCreate_time(String create_time) {
+		this.create_time = create_time;
+	}
+	public Integer getSituation() {
+		return situation;
+	}
+	public void setSituation(Integer situation) {
+		this.situation = situation;
+	}
+	public friendApply() {
+		super();
+	}
+	@Override
+	public String toString() {
+		return "friendApply [id=" + id + ", apply_id=" + apply_id
+				+ ", create_time=" + create_time + ", situation=" + situation
+				+ ", person_id=" + person_id + "]";
+	}
+	public friendApply(Integer id, Integer apply_id, String create_time,
+			Integer situation, Integer person_id) {
+		super();
+		this.id = id;
+		this.apply_id = apply_id;
+		this.create_time = create_time;
+		this.situation = situation;
+		this.person_id = person_id;
+	}
+}

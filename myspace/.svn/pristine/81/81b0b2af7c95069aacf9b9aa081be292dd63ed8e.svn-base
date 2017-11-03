@@ -1,0 +1,39 @@
+.aldum{
+	background:url(../aldum_images/bg.jpg);
+	height: 800px; 
+	width:1100px;
+	border-radius: 15px;
+    padding-left: 3%;
+    overflow:hidden; 
+    background-position: -100px -200px;
+    display:none;
+}
+#Allaldum{
+	height: 100%; 
+	width:100%;
+	overflow-y:scroll;
+    padding-right: 17px;
+	
+	
+	/*background:url(../aldum_images/bg.jpg);*/
+	
+}
+#upImg{
+	margin-top:12px;
+	margin-left:350px;
+}
+#upImg input{
+	float:left;
+	margin-left:10px;
+}
+
+
+.Info{
+	display: none; 
+	height: 700px; 
+	width: 800px;
+	opacity: 0.9;
+	padding-top:0px;
+	background:none;
+	border-radius: 15px;
+}

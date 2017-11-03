@@ -1,0 +1,51 @@
+package groupthree.myspace.lzz.controller;
+
+import groupthree.myspace.bean.person;
+import groupthree.myspace.lzz.service.LzzPersonService;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
+
+
+@Controller(value="LzzPersonController")
+@RequestMapping(value="/personAction",produces="text/plain;charset=utf-8")
+public class LzzPersonController {
+	@Resource(name="LzzPersonService")LzzPersonService lzzPersonService;
+	Gson gson = new Gson();
+	@RequestMapping(value="/login",method=RequestMethod.POST)
+	@ResponseBody
+	public String login(person person,Model model,HttpServletRequest request) {
+		person p = lzzPersonService.login(person);
+		if(p!=null){
+			request.getSession().setAttribute("user",p);
+			return "ok";
+		}else
+			return "no";
+	}
+	
+	@RequestMapping(value="/setPersonInfo")
+	@ResponseBody
+	public String setPersonInfo(HttpServletRequest request){
+		return gson.toJson(request.getSession().getAttribute("user"));
+	}
+	
+	@RequestMapping(value="/register")
+	@ResponseBody
+	public String register(person person,Model model){
+		person.setSpace((int)(Math.random()*1000000+1));
+		String result="";
+		if(lzzPersonService.register(person))
+			result = "{\"result\":\"ok\",\"space\":\""+person.getSpace()+"\"}";
+		else
+			result = "{\"result\":\"no\"}";
+		return result;
+	}
+}

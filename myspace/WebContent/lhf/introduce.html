@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>My Space</title>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href='https://fonts.useso.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.useso.com/css?family=Lato:400,900,700,300,100' rel='stylesheet' type='text/css'>
+<link href='https://fonts.useso.com/css?family=Roboto+Slab:400,700,300,100' rel='stylesheet' type='text/css'>
+<script src="https://ajax.useso.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+
+<body>
+<div class="header">
+	<div class="container">
+    	<div class="row">
+        	<div class="col-md-12 col-sm-12 col-xs-12">
+            	<div class="logo pull-left col-md-6 col-sm-6 col-xs-12">
+                	<h1>My Space</h1>
+                </div>
+               
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+            	<div class="main-title text-center">
+                	<h2>My Space</h2>
+                    <p>Space是由我们小组五个人历经半个月的时间共同开发出来，该项目是模仿QQ空间来进行开发的。总共分为六个模块，包括说说模块、相册模块、留言板模块、好友聊天模块和登陆注册模块，以及后台管理员模块。</p>
+                    <div id="countdown" data-wow-delay=".3s" data-date="Dec 26, 2015 06:00:00"></div>
+                    <a href="../lzz/mainView.html" class="subscribe-tag page-scroll">进入空间</a>
+                </div>
+                
+                	
+            </div>
+        </div>
+    </div>
+</div>
+<div class="about text-center">
+	<div class="container">
+    	<div class="row">
+        	<div class="col-md-12">
+            	<div class="title">
+                	<h3>关于我们</h3>
+                </div>
+                <div class="desc">
+                	<p>我们小组成员包括组长赖漳州同学，组员张菲利同学、扈嘉楠同学、郑敏华同学和罗会峰同学。</p>
+                </div>
+            </div>
+            <div class="featurebox col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+            	<div class="feature text-left">
+                	<h4>我们的方法</h4>
+                    <p>我们的方法很简单，就是不懂你就问，问同学、问老师或者上网查都行；不会你就学，学无止境。</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+            	<div class="feature text-left">
+                	<h4>我们的目标</h4>
+                    <p>我们的目标，做一个属于自己的项目，难吗？挺难的。但是还是得去完成，因为你完成不了就说明你不行，当然我们肯定是不愿让别人说不行的，所以我们的目标仅仅只是为了能得到一个肯定。</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+            	<div class="feature text-left">
+                	<h4>我们的流程</h4>
+                    <p>我们的流程大致是，先按照需求分析进行创建各表及表之间的关联，然后通过框架实现对表的操作，从数据库中获取想要的数据，经过服务器处理之后加载到前台页面。最后就是进行测试看看是否存在那些缺陷并进行完善。</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+            	<div class="feature text-left">
+                	<h4>我们的愿景</h4>
+                    <p>我们的远景是经过这一次项目的锻炼能够最大化的实现自己的能力，并把范老师所教的东西都运用上，通过分工协作完成总体目标。</p>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer" id="footer">
+	<div class="container">
+    	<div class="row">
+        	<div class="col-md-12">
+        	<div class="footer-title text-center">
+            	<h3>注册我们，说不定下一秒脱单的就是你了！</h3>
+                <p>在我们的网站上获得最新的好友动态与信息，及时的与好友进行互动。</p>
+            </div>
+            <div class="subscribeform">
+            	<form class="subscribe_form" action="#" method="post">
+	                <input required value="" placeholder="说说您的意见与建议..." class="email" id="email" name="email" type="email">
+	                <input class="subscribe" name="email" value="发送" type="submit">
+	            </form>
+            </div>
+            
+             </div>
+             <div class="col-md-12 text-center footer-line">
+             	<p>版权 &copy; 2017.项目名称保留所有权利。<a target="_blank" href="http://sc.chinaz.com/moban/">登陆与注册</a></p>
+             </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.countdown.min.js"></script>
+<script type="text/javascript">
+if ($('#countdown').length) { 
+			$('#countdown').countdown({
+				render: function(data) {
+					if (data.years >= 1) {
+						var $days =	(data.years*365)+data.days;
+					} else {
+						var $days = data.days;
+					}
+				  $(this.el).html(
+					  '<div class="day">' + this.leadingZeros($days) + ' <span>Days</span></div>'+
+					  '<div class="hour">' + this.leadingZeros(data.hours, 2) + ' <span>Hours</span></div>'+
+					  '<div class="min">' + this.leadingZeros(data.min, 2) + ' <span>Minutes</span></div>'+
+					  '<div class="sec">' + this.leadingZeros(data.sec, 2) + ' <span>Seconds</span></div>'
+				  );
+				}
+			});
+		}
+
+</script>
+</body>
+</html>

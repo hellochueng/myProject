@@ -1,0 +1,53 @@
+package groupthree.myspace.lzz.test;
+
+
+import groupthree.myspace.bean.imgLogCmt;
+import groupthree.myspace.bean.imgLogLiker;
+import groupthree.myspace.lzz.mapper.LzzPerson_Mapper;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class tttttt {
+	public static void main(String[] args) {
+		ApplicationContext a = new ClassPathXmlApplicationContext("spring.xml");
+		SqlSession ss = (SqlSession) a.getBean("sqlSessionTemplate");
+		//System.out.println(ss);
+//		LzzFriend_Mapper pm = ss.getMapper(LzzFriend_Mapper.class);
+		
+		//DateFormat format= new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒");
+		//p.set(new DATE().toString());
+//		person p = new person();
+//		p.setId(593);
+//		p.setSpace(1);
+//		p.setId(3);
+//		p.setName("张三");
+//		p.setPwd("123456");
+//		p.setSex("女");
+//		p.setImg("sadas");
+//		p.setSignature("ddd");
+//		p.setBirthday(new Timestamp(date.getTime()).toString());
+//		p.setBirthday("1970-01-01");
+//		System.out.println(p);
+//		System.out.println(pm.personRegister(p));
+//		chatLog cl =new chatLog(1,1,2,"我不是胖虎","2017-09-14 00:00:00",0);
+//		friendApply fa = new friendApply(1,1,null,0,20,0,"刘德华");
+		
+		//[id=0, friend_id=3, create_time=2017-09-13, is_delete=0, imgLog_id=24]
+		imgLogLiker imgLogLiker = new imgLogLiker();
+		imgLogLiker.setId(1);
+		imgLogLiker.setFriend_id(1);
+		imgLogLiker.setImgLog_id(22);
+		imgLogLiker.setIs_delete(0);
+		imgLogLiker.setCreate_time("2017-08-09");
+		System.out.println(imgLogLiker);
+		imgLogCmt imgLogCmt = new imgLogCmt();
+		imgLogCmt.setCreate_time("2014-08-08");
+		imgLogCmt.setFriend_id(1);
+		imgLogCmt.setImgLog_id(23);
+		imgLogCmt.setComment_content("不是我胖虎是谁");
+		LzzPerson_Mapper pm = ss.getMapper(LzzPerson_Mapper.class);
+		System.out.println(pm.sendCmt(imgLogCmt));
+	}
+}

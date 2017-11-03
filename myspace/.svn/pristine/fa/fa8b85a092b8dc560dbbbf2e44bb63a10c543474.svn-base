@@ -1,0 +1,16 @@
+jQuery(document).ready(function(){
+	goAjax()
+	setTopNav();
+	setName();
+	showImgLog();
+});
+
+
+
+
+function showImgLog(){
+	//chatLogSet.clearInterval();
+	$(".content").fadeIn('1000');
+	
+}
+

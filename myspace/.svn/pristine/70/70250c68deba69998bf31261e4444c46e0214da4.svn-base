@@ -1,0 +1,77 @@
+package groupthree.myspace.zmh.dao.impl;
+
+import groupthree.myspace.bean.aldum;
+import groupthree.myspace.bean.friend;
+import groupthree.myspace.bean.imgLog;
+import groupthree.myspace.bean.person;
+import groupthree.myspace.bean.picture;
+import groupthree.myspace.zmh.dao.BaseDao;
+import groupthree.myspace.zmh.dao.PsDao;
+import groupthree.myspace.zmh.mapper.PsMapper;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+@Repository(value="zmhPsDaoImpl")
+public class PsDaoImpl extends BaseDao implements PsDao {
+
+	
+	@Override
+	public person login(int space, int pwd) {
+		
+		 return getMapper(PsMapper.class).login(space, pwd);
+	}
+
+	@Override
+	public List<aldum> getAldumAllByPersonId(int id) {
+	
+		return  getMapper(PsMapper.class).getAldumAllByPersonId(id);
+	}
+
+	@Override
+	public List<picture> getPictureByAldumId(int id) {
+		
+		return getMapper(PsMapper.class).getPictureByAldumId(id);
+	}
+
+	@Override
+	public List<imgLog> getImgLogByPersonId(int id) {
+		
+		return getMapper(PsMapper.class).getImgLogByPersonId(id);
+	}
+
+	@Override
+	public List<friend> getFriendsByPersonId(int id) {
+		return getMapper(PsMapper.class).getFriendsByPersonId(id);
+	}
+
+	@Override
+	public int addPictureInAldum(picture picture) {
+		
+		return getMapper(PsMapper.class).addPictureInAldum(picture);
+	}
+  
+    
+	@Override
+	public int addNewAldum(aldum aldum) {
+		
+		return  getMapper(PsMapper.class).addNewAldum(aldum);
+	}
+	
+	@Override
+	public int deletePicture(int id) {
+		return  getMapper(PsMapper.class).deletePicture(id);
+	}
+
+	@Override
+	public int updateAldumName(String name,int id) {
+		return getMapper(PsMapper.class).updateAldumName(name, id);
+	}
+
+	@Override
+	public int deleteAldum(int id, int is_delete) {
+		return getMapper(PsMapper.class).deleteAldum(id, is_delete);
+	}
+  
+}

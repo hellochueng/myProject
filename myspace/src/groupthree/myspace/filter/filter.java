@@ -1,0 +1,57 @@
+package groupthree.myspace.filter;
+
+import groupthree.myspace.bean.person;
+
+import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebFilter(filterName="loginFilter",urlPatterns="*.do")
+public class filter implements Filter {
+
+	@Override
+	public void destroy() {
+	}
+
+	@Override
+	public void doFilter(ServletRequest request, ServletResponse response,
+			FilterChain chain) throws IOException, ServletException {
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		HttpServletRequest httpRequest = (HttpServletRequest) request;
+        HttpServletResponse httpResponse = (HttpServletResponse) response;
+        HttpSession session = httpRequest.getSession();
+        String uri = httpRequest.getRequestURI();
+        person user = (person)session.getAttribute("user");
+        if(uri.contains("/personAction/login.do")||uri.contains("/personAction/register.do")){
+            chain.doFilter(request, response);
+        }else{  
+            if(user == null){
+                if (httpRequest.getHeader("x-requested-with") != null 
+                        && "XMLHttpRequest".equalsIgnoreCase(httpRequest.getHeader("x-requested-with"))) {   
+                	 httpResponse.setHeader("sessionstatus","timeout");
+                     httpResponse.setStatus(403);
+                     httpResponse.addHeader("loginPath", "/myspace/lzz/loginOrRegister.html");
+                     chain.doFilter(request, response);
+                    return ;
+                }
+            }else{
+                chain.doFilter(request, response);
+            }
+        }
+	}
+
+	@Override
+	public void init(FilterConfig arg0) throws ServletException {
+		
+	}
+}

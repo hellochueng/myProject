@@ -1,0 +1,75 @@
+package groupthree.myspace.lzz.service.serviceImpl;
+
+import groupthree.myspace.bean.friendApply;
+import groupthree.myspace.bean.person;
+import groupthree.myspace.lzz.dao.LzzPersonDao;
+import groupthree.myspace.lzz.service.LzzPersonService;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+@Service(value="LzzPersonService")
+public class LzzPersonServiceImpl implements LzzPersonService{
+	
+	@Resource(name="LzzPersonDao")LzzPersonDao lzzPersonDao;
+	
+	@Override
+	public person login(person person) {
+		return lzzPersonDao.login(person);
+	}
+
+	@Override
+	public boolean register(person person) {
+		person.setSex("男");
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+		person.setCreate_time(sf.format(new Date()));
+		person.setImg("/all/img/1_copy.jpg");
+		person.setSignature("我北京人倍牛逼");
+		if(lzzPersonDao.register(person)>0)
+			return true;
+		return false;
+	}
+
+	@Override
+	public boolean changePersonInfo(person person) {
+		if(lzzPersonDao.changePersonInfo(person)>0) return true;
+		else return false;
+		
+	}
+
+	@Override
+	public List<person> getPersonAll(Integer id) {
+		return lzzPersonDao.getPersonAll(id);
+	}
+
+	@Override
+	public boolean applyFriend(friendApply friendApply) {
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+		friendApply.setSituation(0);
+		friendApply.setIs_delete(0);
+		friendApply.setCreate_time(sf.format(new Date()));
+		if(lzzPersonDao.applyFriend(friendApply)>0)
+			return true;
+		else return false;
+	}
+
+	@Override
+	public List<friendApply> getAllApply() {
+		return lzzPersonDao.getAllApply();
+	}
+
+	@Override
+	public boolean isSendApply(friendApply friendApply) {
+		friendApply.setIs_delete(0);
+		friendApply.setSituation(0);
+		if(lzzPersonDao.isSendApply(friendApply)>0)
+			return true;
+		else return false;
+	}
+	
+}

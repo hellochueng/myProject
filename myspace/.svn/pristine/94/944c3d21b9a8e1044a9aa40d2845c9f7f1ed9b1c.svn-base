@@ -1,0 +1,11 @@
+package groupthree.myspace.lzz.mapper;
+
+import groupthree.myspace.bean.person;
+
+import java.util.List;
+
+public interface LzzPerson_Mapper {
+	person personLogin(person person);
+	List<person> getPersonAll();
+	int personRegister(person person);
+}

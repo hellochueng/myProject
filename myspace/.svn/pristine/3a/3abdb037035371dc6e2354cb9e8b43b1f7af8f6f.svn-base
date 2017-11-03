@@ -1,0 +1,34 @@
+package groupthree.myspace.lzz.dao.daoImpl;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import groupthree.myspace.bean.person;
+import groupthree.myspace.lzz.dao.LzzPersonDao;
+import groupthree.myspace.lzz.mapper.LzzPerson_Mapper;
+
+@Repository(value="LzzPersonDao")
+public class LzzPersonDaoImpl extends LzzBaseDao implements LzzPersonDao{
+
+	@Override
+	public person login(person person) {
+		return getMapper(LzzPerson_Mapper.class).personLogin(person);
+	}
+
+	@Override
+	public int register(person person) {
+		return getMapper(LzzPerson_Mapper.class).personRegister(person);
+	}
+
+	@Override
+	public int changePersonInfo(person person) {
+		return getMapper(LzzPerson_Mapper.class).changePersonInfo(person);
+	}
+
+	@Override
+	public List<person> getPersonAll(Integer id) {
+		return getMapper(LzzPerson_Mapper.class).getPersonAll(id);
+	}
+
+}

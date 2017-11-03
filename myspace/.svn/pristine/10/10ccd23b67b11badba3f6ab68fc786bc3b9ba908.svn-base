@@ -1,0 +1,138 @@
+jQuery(document).ready(function(){
+	var chatLogSet;
+	setTopNav();
+	setName();
+	showImgLog();
+});
+
+function setTopNav(){
+	var navBody='<div class="navigation-up"><div class="navigation-inner" ><div class="navigation-v3" ><ul >';
+	navBody+='<li class="nav-up-selected-inpage" _t_nav="home"><h2><a style="font-size: 18px;"><img class="personImg" src="all/images/myspace2.png">myspace</a></h2></li>';
+	navBody+='<li class="selectNav" _t_nav="product"><h2><a href="#"><div id="friendTrends"></div>好友动态</a></h2></li>';
+	navBody+='<li class="" _t_nav="wechat"><h2><a href="#"><div id="findFriend"></div>找朋友?</a></h2></li>';
+	navBody+='<li><h2><a href="#" style="width: 400px;"></a></h2></li>';
+	navBody+='<li class="" _t_nav="cooperate"><h2><a href="#" class="tooltips" tooltip="" tooltip-position="bottom"><span class="username">';
+	navBody+='<img src="all/images/w6.jpg">我是胖虎</span><img class="personImg" src="all/images/w6.jpg" /><font class="username">个人姓名</font></a></h2></li>';
+	navBody+='<li _t_nav="support" "><h2><a href="#">帮助与支持</a></h2></li>';
+	navBody+='</ul></div></div></div>';
+	$(".head-v3").html(navBody);
+}
+
+function setName(){
+	$.ajax({
+		url:"/myspace/personAction/setPersonInfo",
+		async:false,
+		dataType:"json",
+		success:function(data){
+			$(".username").text(data.name);
+		}
+	});
+}
+
+
+
+function showImgLog(){
+	//chatLogSet.clearInterval();
+	$("#chat").hide();
+	
+	$("#ImgLog").fadeIn('2000');
+	window.clearInterval(chatLogSet);
+	
+}
+
+function showFriends(){
+	$("#ImgLog").hide();
+	$("#chat").fadeIn('slow');
+	$.ajax({
+		type:"get",
+		async:false,
+		url:"/myspace/friendAction/setFriendList",
+		dataType:"json",
+		success:function(data){
+			if(data.length>0){
+				var list = '';
+				for(var i=0;i<data.length;i++){
+					if(data[i].is_delete==0){
+					//alert(data[i].remark);
+						list+='<ul><li class="" value="'+data[i].friend_id+'"><img class="avatar" width="30"';
+						list+='height="30" alt="示例介绍" src="all/img/1_copy.jpg">';
+						list+='<p class="name">'+data[i].remark+'</p></li></ul>';
+					}
+				}
+				//把好友list显示
+				$("#friendList").html(list);
+				//把当前聊天者的昵称显示
+				$("#chatFriend").text($("#friendList li:first p").html());
+				//设置当前聊天者的id
+				$(".m-message").attr("value",data[0].friend_id);
+				//将聊天记录显示
+				setChatLog();
+				setchatInterval();
+			}
+			else{
+				$("#chatFriend").text("当前没有好友");
+			}
+		}
+	});
+	
+	
+	
+	$("#friendList li").click(function() {
+		$(".m-message").attr("value",$(this).prop("value"));
+		$("#chatFriend").text($(this).text());
+		//清除聊天计时器
+		window.clearInterval(chatLogSet);
+		//设置聊天记录
+		setChatLog();
+		setchatInterval();
+	})
+}
+
+
+
+function setChatLog(){
+		$.ajax({
+			type:"post",
+			url:"/myspace/friendAction/setChatLog",
+			data:{"friend_id":$(".m-message").attr("value")},
+			dataType:"json",
+			success:function(data){
+				var chatLogset = "";
+				for(var i = 0;i<data.length;i++){
+					if(data[i].sender_id==$(".m-message").attr("value")){
+						chatLogset+='<li><p class="time"><span>'+data[i].create_time+'</span></p><div class="main">';
+						chatLogset+='<img class="avatar" width="30" height="30" src="all/img/1_copy.jpg">';
+						chatLogset+='<div class="text">'+data[i].content+'</div></div></li>';
+					}else{
+						chatLogset+='<li><p class="time"><span>'+data[i].create_time+'</span></p><div class="main self">';
+						chatLogset+='<img class="avatar" width="30" height="30" src="all/img/1_copy.jpg">';
+						chatLogset+='<div class="text">'+data[i].content+'</div></div></li>';
+					}
+				}
+				$("#messageList").html(chatLogset);
+				
+			}
+		});
+}
+
+function setchatInterval(){
+	chatLogSet = setInterval(function(){
+		setChatLog();
+		//$('#message').scrollTop($('#message')[0].scrollHeight);
+	},3000);
+}
+
+document.onkeydown = function(e) {
+    if (13 == e.keyCode && e.ctrlKey)
+    {
+    	alert($("#sendMessage").html());
+    	$.ajax({
+    		url:"myspace/friendAction/sendMessage",
+    		type:"get",
+    		data:{"content":$("#sendMessage").html(),"getter_id":$(".m-message").attr("value")},
+    		success:function(data){
+    			
+    		}
+    	});
+    }
+}

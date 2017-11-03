@@ -1,0 +1,49 @@
+jQuery(document).ready(function(){
+	goAjax()
+	setTopNav();
+	setName();
+	showImgLog();
+});
+
+
+
+
+function showImgLog(){
+	$(".content").fadeIn();
+	$.ajax({
+		type:"get",
+		url:"/myspace/zmhperson/getAllFriendImgLog.do",
+		async : false,
+		dataType:"json",
+		success:function(data){
+			var body="";
+			for(var i =0;i<data.length;i++){
+				if(data[i].is_delete==0){
+					body+='<div class="msgCon"><div class="msgBox"><dl>';
+					body+='<dt><img src="'+data[i].img+'" width="50" height="50"/></dt>';
+					body+='<dd>'+data[i].name+'</dd><dd>'+data[i].create_time+'</dd></dl>';
+					body+='<img style="margin-top: 40px;margin-left: -55%;" src="'+data[i].imgSrc+'" width="300" height="300"/>';
+					body+='<div class="msgTxt" style="text-align: left;">'+data[i].imgLog_content+'</div><div id="buttom"></div>';
+					body+='<div style="margin-top: 10px;margin-left: -55%;"><a  href="javaScript:likerLog()"><img src="all/images/likes.png"/></a>';
+					var x=0;
+					for(var j=0;j<data[i].logLiker_list.length;j++)
+						if(data[i].logLiker_list[j].is_delete==0){
+							body+=data[i].logLiker_list[j].name+',';
+							x++;
+						}
+					body+=x+'等人觉得很赞';
+					body+='</div><div class="content">';
+					for(var j=0;j<data[i].imgLogCmt_list.length;j++)
+						if(data[i].imgLogCmt_list[j].is_delete==0){
+							body+='<dl><dt><img src="'+data[i].imgLogCmt_list[j].img+'" width="30" height="30"/></dt>';
+							body+='<dd>'+data[i].imgLogCmt_list[j].name+'：'+data[i].imgLogCmt_list[j].comment_content+'</dd></dl>';
+						}
+					body+='</div><div id="content" style="height:50px"><ul style="margin-left: -55%;"><input />';
+					body+='</ul></div></div></div>';
+				}
+			}
+			$("#showImgLog").html(body);
+		}
+	});
+}
+

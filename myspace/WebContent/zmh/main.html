@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+   #message #person li{
+     list-style:none;
+     float:left;
+     color:blue;
+   }
+   #showPicture{
+      width:700px;
+      height:600px;
+      border:1px solid red;
+      background: url(aldumImg/aldum_bg.jpg) repeat center 0;
+   }
+  
+</style>
+<script type="text/javascript" src="Javascript/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="Javascript/main.js"></script>
+<link rel="stylesheet" href="html/css/style.css" type="text/css" media="all" />
+<script src="Javascript/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+   
+</head>
+<body>
+<div id="basic">
+	<div >
+	   <h1>欢迎<span id="span"></span>用户</h1>
+	   <div id="showname"></div><br/>
+	   <div id="showother"></div>
+	</div>
+	
+	<div id="message">
+	   <ul id="person">
+	     <li><a id="hide" href="#">个人资料</a>&nbsp;&nbsp;&nbsp;</li>
+	     <li><a id="hideImgLog" href="#">说说</a>&nbsp;&nbsp;&nbsp;</li>
+	     <li><a id="hideAldum" href="#">相册</a></li>
+	   </ul>
+	</div><br/>
+	<!-- 显示个人资料 -->
+	<div id="allmessage" style="display:none">
+	   
+	</div>
+	
+	<div id="showImgLog" style="display:none">
+
+	</div>
+	
+	<div id="showAldum" style="display:none">
+
+	</div>
+	<div id="showPicture" style="display:none; overflow-y:auto; overflow-x:auto;  width:800px; height:600px;">
+	
+	</div>
+	<form action="/myspace/zmhperson/transfrom.do" enctype="multipart/form-data"  method="post">	
+     	<input type="text"  name="id" id="selectAldumId" style="display:none" />
+     	  上传个人图片:<input type="file" name="file" id="img"> <br/>
+                <input type="submit" value="上传" id="selectAldum">
+    </form>
+	    <div id="hideDiv" >
+	                         请选择要上传的相册<br>  
+	        <select id="select">  
+	        </select>
+	    </div>
+	 <form action="/myspace/zmhperson/newAldum" enctype="multipart/form-data"  method="post">
+   	    <input type="button" value="新建相册" id="newAldum">
+	    <div id="newAldumMessage"  style="display:none">
+	                  相册名:<input type="text" name="aldumName" id="aldumName">
+	           <input type="text" name="id" id="personId" style="display:none">        
+	           <input type="submit" value="确定">
+	    </div>
+	    
+   </form>
+ </div> 
+   
+   
+<!--     
+ <div class="shell">
+	<div id="header">			
+		<div class="cl">&nbsp;</div>
+		<h1 id="logo" class="notext"><a href="#"></a></h1>
+		<div class="cl">&nbsp;</div>	
+	</div>
+	
+	<div id="main">
+		
+		<div class="image-box">
+			<span class="drag-pointer">&nbsp;</span>
+		
+			 <div class="photo-cover">
+				<a href="aldumImg/tiger.jpg" class="big-image"><img style="width:166px; height:106px"  src="aldumImg/tiger.jpg"   alt="" /></a>
+			    
+			 </div>
+			<p class="photo-name">记住爱</p>	
+		</div>	
+		<div class="cl">&nbsp;</div>
+	</div>
+</div> -->
+
+</body>
+</html>

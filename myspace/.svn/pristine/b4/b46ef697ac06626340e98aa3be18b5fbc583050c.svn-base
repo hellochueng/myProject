@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:必须和接口的完全限定名保持一致 -->
+<mapper namespace="groupthree.myspace.zfl.mapper.PersonMapper">
+	<select id="selectPersonByNameAndPwd" parameterType="String" resultType="person">
+		select * from person where name=#{name} and pwd=#{pwd}
+	</select>
+	<select id="selectPerson" resultType="person">
+		select * from person
+	</select>
+	<select id="selectImgLogCmt" parameterType="Integer" resultType="imgLogCmt">
+		select * from imglogcmt where id=#{id}
+	</select>
+	<select id="selectLogLiker" parameterType="Integer" resultType="imgLogLiker">
+		select * from imglogliker where id=#{id}
+	</select>
+</mapper>

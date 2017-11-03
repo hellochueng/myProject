@@ -1,0 +1,25 @@
+package groupthree.myspace.lzz.controller;
+
+import javax.annotation.Resource;
+
+import groupthree.myspace.bean.person;
+import groupthree.myspace.lzz.service.LzzPersonService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+
+@Controller(value="LzzPersonController")
+@RequestMapping("/personAction")
+public class LzzPersonController {
+	
+	@Resource(name="LzzPersonServiceImpl")LzzPersonService lzzPersonService;
+	
+	@RequestMapping("/login")
+	public String login(person person) {
+		System.out.println(person);
+		lzzPersonService.login(person);
+		return "dd";
+	}
+}

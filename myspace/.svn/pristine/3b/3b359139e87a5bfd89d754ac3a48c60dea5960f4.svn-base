@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:今天不能随便写,必须和接口的完全限定名保持一致 -->
+<mapper namespace="groupthree.myspace.lhf.mapper.ImgLogMapper">
+	<!-- 查询所有未删除的说说（此处即is_delete为0的数据，当is_delete为非0数即被删除用户无法查看到） -->
+	<select id="getImgLogAll" resultType="lhfil">
+		select id,person_id,imglog_content,create_time,is_delete,permission from imglog where is_delete=#{is_delete} order by id asc
+		 
+	</select>
+	<!-- 写说说 is_delete和permission默认为0，即未被删除可查询并且默认允许别人查看 -->
+	<insert id="addImgLog">
+		insert into imglog values(#{id},#{person_id},#{imglog_content},to_date(#{create_time},'YYYY-MM-DD HH24:MI:SS'),#{is_delete},#{permission})
+	</insert>
+	<!-- 删除说说 即把is_delete修改为非0数，默认为1，使用户无法查询到即可 -->
+	<update id="deleteImgLog">
+		update imglog set is_delete=#{is_delete} where id=#{id}
+	</update>
+	<!-- 修改说说查看权限 即把permission修改为非0数，默认为1，使别人无法查询到即可 -->
+	<update id="changePermission">
+		update imglog set permission=#{permission} where id=#{id}
+	</update>
+</mapper>

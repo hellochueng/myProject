@@ -1,0 +1,78 @@
+    *{margin:0px; padding:0px;}
+	
+	.content .msgBox{ 
+		margin-top:20px;
+	    background:#fff;  
+		height:350px; 
+		
+		border:3px solid blue;
+		
+	 }
+	.content{   
+	     width:700px;
+	     height:auto;
+	    
+	  }
+	.content .msgBox dl{height:60px; }
+	.content .msgBox dl dt{width:50px; height:50px;float:left;margin-top:8px;margin-left:8px;}
+	.content .msgBox dl dt img{border-radius:25px; }
+	.content .msgBox dl dd{
+		width:120px; height:50px;
+		line-height:60px;float:left; 
+		margin-left:8px; 
+		font-size:16px;font-family:"Î¢ÈíÑÅºÚ";
+		text-align:left;
+		}
+	
+	.content .msgBox .msgTxt{font-size:18px; color:#666; line-height:25px; text-algin:left; float:left;}
+	#buttom{
+		margin-top: 30px;
+		border-bottom: 1px solid #ddd;
+	}
+	#top{	border-bottom: 1px solid #ddd;}
+	#content{
+	 /*  border:1px solid red; */
+	  height:30px;
+	   
+	}
+	#content ul li{
+		list-style-type:none;
+		float:left;
+		margin-left:10px; 
+		cursor:pointer;
+		font-size:15px;
+	}
+	#clickLiker{
+      /* border:1px solid blue; */
+      height:30px;
+	}
+	#clickLiker ul li{
+	  float:left;
+	}
+	#sender{
+	  
+	  margin-left:12px;
+	}
+	#sender dl{height:40px; } 
+	#sender dl dt{width:30px; height:30px;float:left;margin-top:4px;margin-left:4px;}
+	#sender dl dt img{border-radius:15px; }
+	#sender dl dd{
+	       width:60px; height:30px; 
+	       line-height:40px;
+	       float:left; margin-left:2px;
+	        font-size:10px;font-family:"Î¢ÈíÑÅºÚ";
+	        text-align:left;
+	        
+	       }
+	      
+	
+	#senderCmt{
+       
+	   text-algin:left;
+	   
+	}
+	
+	
+	
+	
+	

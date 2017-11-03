@@ -1,0 +1,11 @@
+package groupthree.myspace.zfl.service;
+
+import groupthree.myspace.bean.person;
+
+import java.util.List;
+
+public interface IPersonService {
+	List<person> selectPerson();
+	
+	person selectPersonByNameAndPwd(String name,String pwd);
+}

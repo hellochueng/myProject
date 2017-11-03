@@ -1,0 +1,34 @@
+package groupthree.myspace.lhf.test;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import groupthree.myspace.lhf.bean.ImgLog;
+import groupthree.myspace.lhf.mapper.ImgLogCmtMapper;
+import groupthree.myspace.lhf.mapper.ImgLogLikerMapper;
+import groupthree.myspace.lhf.mapper.ImgLogMapper;
+import groupthree.myspace.lhf.mapper.LogImgMapper;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class ImgLogTest {
+	public static void main(String[] args) {
+		SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date now=new Date();
+		String time = df.format(now);
+//		System.out.println(a);
+		ApplicationContext context=new ClassPathXmlApplicationContext("spring.xml");
+		SqlSession sqlSession=context.getBean(SqlSession.class);
+//		System.out.println(sqlSession);
+		ImgLogMapper mapper=sqlSession.getMapper(ImgLogMapper.class);
+//		mapper.addImgLog(new ImgLog(6, 3, "ÎÒºÃ¶ö°¡£¡", time, 0, 0));
+//		mapper.deleteImgLog(1, 1);
+//		mapper.changePermission(1, 2);
+		System.out.println(mapper.getImgLogAll(0));
+		
+
+	}
+}
+	

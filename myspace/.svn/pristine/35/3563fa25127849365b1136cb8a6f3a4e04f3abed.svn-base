@@ -1,0 +1,4 @@
+function showFriends(){
+	$("#chat").fadeIn('1000');
+	
+}

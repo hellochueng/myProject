@@ -1,0 +1,51 @@
+package groupthree.myspace.hjn.test;
+
+import java.util.List;
+
+import groupthree.myspace.bean.person;
+import groupthree.myspace.hjn.dao.HPersonDao;
+import groupthree.myspace.hjn.dao.imp.HPersonDaoImp;
+import groupthree.myspace.hjn.mapper.HPersonMapper;
+import groupthree.myspace.zfl.dao.IPersonDao;
+import groupthree.myspace.zfl.mapper.PersonMapper;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class Test {
+	public static void main(String[] args) {
+		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+		SqlSession sqlSession = context.getBean(SqlSession.class);
+
+		//测试Dao层更新用户
+		HPersonDao hd=(HPersonDao) context.getBean("HPersonDaoImp");
+//		hd.updatePersonById(1,0);
+		
+		//测试Dao层删除用户说说
+//		hd.updateImgLogById(1);
+		
+		//测试Dao层删除用户相册
+//		hd.updateAldumById(1);
+		
+		//测试Dao层删除说说评论
+		//hd.updateImgLogCmtById(1);
+		
+		//测试Dao层删除用户相片
+		//hd.updatePictureById(1);
+		
+		//测试Dao层删除好友
+		//hd.updateFriendById(1);
+		
+		//测试Dao层修改用户昵称
+		//hd.updatePersonNameById(1, "农大蔡依林");
+		//测试Dao层修改用户个性签名
+		hd.addPersonInfo(6,201425,"旋风", "hjn1452", "女","1995-7-29", "爱你");
+		
+//		//菲姐的方法
+//		IPersonDao pm = (IPersonDao) context.getBean("zflPersonDaoImp");
+//		for(person p:pm.selectPerson()){
+//			System.out.println(p);
+//		}
+	}
+}

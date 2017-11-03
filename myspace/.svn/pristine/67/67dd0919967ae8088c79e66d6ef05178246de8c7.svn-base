@@ -1,0 +1,42 @@
+/**
+ * 
+ */
+package groupthree.myspace.lhf.dao.impl;
+
+import java.util.List;
+
+import groupthree.myspace.lhf.bean.ImgLogCmt;
+import groupthree.myspace.lhf.dao.BaseDao;
+import groupthree.myspace.lhf.dao.ImgLogCmtDao;
+import groupthree.myspace.lhf.mapper.ImgLogCmtMapper;
+
+import org.springframework.stereotype.Repository;
+
+
+/**
+ * @author 罗会峰
+ *
+ */
+@Repository(value = "ImgLogCmtDaoImpl")
+//@Repository
+public class ImgLogCmtDaoImpl extends BaseDao implements ImgLogCmtDao {
+	
+	@Override
+	//查看所有未被删除的说说评论，is_delete默认为0是没有删除即可被用户查看到的
+	public List<ImgLogCmt> getImgLogCmts(Integer is_delete) {
+		return getMapper(ImgLogCmtMapper.class).getImgLogCmts(is_delete);
+	}
+
+	@Override
+	//对好友说说进行评论
+	public int addImgLogCmt(ImgLogCmt imglogcmt) {
+		return getMapper(ImgLogCmtMapper.class).addImgLogCmt(imglogcmt);
+	}
+
+	@Override
+	//删除好友的说说评论，即修改is_delete字段为非0数时即代表被删除此时用户不可见
+	public int deleteImgLogCmt(Integer is_delete, Integer id) {
+		return getMapper(ImgLogCmtMapper.class).deleteImgLogCmt(is_delete, id);
+	}
+
+}

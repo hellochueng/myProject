@@ -1,0 +1,22 @@
+package groupthree.myspace.bean;
+
+import java.util.List;
+
+import org.apache.ibatis.type.Alias;
+import org.springframework.stereotype.Component;
+
+@Component
+@Alias("person")
+public class person {
+	private Integer id;
+	private Integer space;
+	private String name;
+	private String pwd;
+	private String sex;
+	private String birthday;
+	private String img;
+	private String signature;
+	private List<friend> friend_list;
+	private List<friendApply> apply_list;
+	
+}

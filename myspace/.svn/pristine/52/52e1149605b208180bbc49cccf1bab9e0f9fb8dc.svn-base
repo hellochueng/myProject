@@ -1,0 +1,27 @@
+package groupthree.myspace.zmh.mapper;
+
+import groupthree.myspace.bean.aldum;
+import groupthree.myspace.bean.friend;
+import groupthree.myspace.bean.imgLog;
+import groupthree.myspace.bean.person;
+import groupthree.myspace.bean.picture;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+public interface PsMapper {
+
+    person login(@Param("space")int space,@Param("password")int pwd);
+    
+    List<aldum> getAldumAllByPersonId(int id);
+    
+    List<picture> getPictureByAldumId(int id);
+    
+    List <imgLog> getImgLogByPersonId(int id);
+    
+    List <friend> getFriendsByPersonId(int id);
+    
+    int addPictureInAldum(picture picture);
+    
+    int addNewAldum(aldum aldum);
+}

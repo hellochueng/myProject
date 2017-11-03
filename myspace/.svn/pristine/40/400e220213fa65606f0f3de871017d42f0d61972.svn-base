@@ -1,0 +1,8 @@
+package groupthree.myspace.lzz.dao;
+
+import groupthree.myspace.bean.person;
+
+public interface LzzPersonDao {
+	person login(person person);
+	int register(person person);
+}

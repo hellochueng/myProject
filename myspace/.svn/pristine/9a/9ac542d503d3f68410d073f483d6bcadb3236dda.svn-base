@@ -1,0 +1,16 @@
+.aldum{
+	display: none; 
+	height: 700px; 
+	width: 1000px;
+	border-radius: 15px;
+}
+
+.Info{
+	display: none; 
+	height: 700px; 
+	width: 800px;
+	opacity: 0.9;
+	padding-top:0px;
+	background:none;
+	border-radius: 15px;
+}

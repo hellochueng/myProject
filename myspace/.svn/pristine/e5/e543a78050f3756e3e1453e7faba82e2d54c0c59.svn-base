@@ -1,0 +1,43 @@
+package groupthree.myspace.lzz.service.serviceImpl;
+
+import groupthree.myspace.bean.person;
+import groupthree.myspace.lzz.dao.LzzPersonDao;
+import groupthree.myspace.lzz.service.LzzPersonService;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+@Service(value="LzzPersonService")
+public class LzzPersonServiceImpl implements LzzPersonService{
+	
+	@Resource(name="LzzPersonDao")LzzPersonDao lzzPersonDao;
+	
+	@Override
+	public person login(person person) {
+		return lzzPersonDao.login(person);
+	}
+
+	@Override
+	public boolean register(person person) {
+		person.setSex("男");
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+		person.setCreate_time(sf.format(new Date()));
+		person.setImg("/ddd.jpg");
+		person.setSignature("我北京人倍牛逼");
+		if(lzzPersonDao.register(person)>0)
+			return true;
+		return false;
+	}
+
+	@Override
+	public boolean changePersonInfo(person person) {
+		if(lzzPersonDao.changePersonInfo(person)>0) return true;
+		else return false;
+		
+	}
+	
+}

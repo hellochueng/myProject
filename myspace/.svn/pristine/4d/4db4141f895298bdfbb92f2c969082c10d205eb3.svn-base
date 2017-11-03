@@ -1,0 +1,85 @@
+
+package groupthree.myspace.lhf.bean;
+
+import org.apache.ibatis.type.Alias;
+import org.springframework.stereotype.Component;
+
+/**
+ * @author 罗会峰
+ *
+ */
+
+@Component
+@Alias("lhfilcmt")
+public class LHFImgLogCmt {
+	//说说评论主键id
+	private Integer id;
+	//外键关联说说主键
+	private Integer imglog_id;
+	//外键评论者id 关联friend主键 
+	private Integer friend_id;
+	//评论内容
+	private String comment_content;
+	//创建时间
+	private String create_time;
+	//是否删除 判断是否显示 0为否 1为是
+	private Integer is_delete;
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Integer getImglog_id() {
+		return imglog_id;
+	}
+	public void setImglog_id(Integer imglog_id) {
+		this.imglog_id = imglog_id;
+	}
+	public Integer getFriend_id() {
+		return friend_id;
+	}
+	public void setFriend_id(Integer friend_id) {
+		this.friend_id = friend_id;
+	}
+	public String getComment_content() {
+		return comment_content;
+	}
+	public void setComment_content(String comment_content) {
+		this.comment_content = comment_content;
+	}
+	public String getCreate_time() {
+		return create_time;
+	}
+	public void setCreate_time(String create_time) {
+		this.create_time = create_time;
+	}
+	public Integer getIs_delete() {
+		return is_delete;
+	}
+	public void setIs_delete(Integer is_delete) {
+		this.is_delete = is_delete;
+	}
+	@Override
+	public String toString() {
+		return "ImgLogCmt [id=" + id + ", imglog_id=" + imglog_id
+				+ ", friend_id=" + friend_id + ", comment_content="
+				+ comment_content + ", create_time=" + create_time
+				+ ", is_delete=" + is_delete + "]";
+	}
+	public LHFImgLogCmt(Integer id, Integer imglog_id, Integer friend_id,
+			String comment_content, String create_time, Integer is_delete) {
+		super();
+		this.id = id;
+		this.imglog_id = imglog_id;
+		this.friend_id = friend_id;
+		this.comment_content = comment_content;
+		this.create_time = create_time;
+		this.is_delete = is_delete;
+	}
+	public LHFImgLogCmt() {
+		super();
+	}
+}
+	
+	

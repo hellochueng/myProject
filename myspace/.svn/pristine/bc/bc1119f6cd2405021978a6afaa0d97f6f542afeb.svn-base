@@ -1,0 +1,59 @@
+package groupthree.myspace.bean;
+
+import java.util.List;
+
+public class aldum {
+	private Integer id;
+	private String create_time;
+	private Integer is_delete;
+	private Integer permission;
+	private List<picture> picture_list;
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getCreate_time() {
+		return create_time;
+	}
+	public void setCreate_time(String create_time) {
+		this.create_time = create_time;
+	}
+	public Integer getIs_delete() {
+		return is_delete;
+	}
+	public void setIs_delete(Integer is_delete) {
+		this.is_delete = is_delete;
+	}
+	public Integer getPermission() {
+		return permission;
+	}
+	public void setPermission(Integer permission) {
+		this.permission = permission;
+	}
+	public List<picture> getPicture_list() {
+		return picture_list;
+	}
+	public void setPicture_list(List<picture> picture_list) {
+		this.picture_list = picture_list;
+	}
+	@Override
+	public String toString() {
+		return "aldum [id=" + id + ", create_time=" + create_time
+				+ ", is_delete=" + is_delete + ", permission=" + permission
+				+ ", picture_list=" + picture_list + "]";
+	}
+	public aldum(Integer id, String create_time, Integer is_delete,
+			Integer permission, List<picture> picture_list) {
+		super();
+		this.id = id;
+		this.create_time = create_time;
+		this.is_delete = is_delete;
+		this.permission = permission;
+		this.picture_list = picture_list;
+	}
+	public aldum() {
+		super();
+	}
+}

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop.xsd 
+	http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns="http://www.springframework.org/schema/beans">
+
+	<!-- ********************spring加mybatis配置********************************************** -->
+
+	<!-- ioc加载注解对象配置 -->
+	<context:component-scan base-package="groupthree.myspace" />
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+		id="propertyConfigurer">
+		<property value="classpath:jdbc.properties" name="location" />
+	</bean>
+	<bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource"
+		destroy-method="close">
+		<property value="${driver}" name="driverClassName" />
+		<property value="${url}" name="url" />
+		<property value="${username}" name="username" />
+		<property value="${password}" name="password" />
+		<!-- 初始化连接大小 -->
+		<property value="${initialSize}" name="initialSize" />
+		<!-- 连接池最大数量 -->
+		<property value="${maxActive}" name="maxActive" />
+		<!-- 连接池最大空闲 -->
+		<property value="${maxIdle}" name="maxIdle" />
+		<!-- 连接池最小空闲 -->
+		<property value="${minIdle}" name="minIdle" />
+		<!-- 获取连接最大等待时间 -->
+		<property value="${maxWait}" name="maxWait" />
+	</bean>
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+		<property name="dataSource" ref="dataSource" />
+		<!-- configLocation可以单独指定具体配置文件,mapperLocations则不需要 <property name="configLocation" 
+			value="classpath:sqlMapConfig.xml"/> -->
+		<!-- 自动扫描mapping.xml文件，**表示迭代查找,也可在sqlMapConfig.xml中单独指定xml文件 -->
+		<!-- <property value="groupthree/myspace/mapper/*.xml" name="mapperLocations" /> -->
+		<property value="groupthree.myspace" name="typeAliasesPackage" />
+	</bean>
+	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
+	    <property name="basePackage" value="groupthree.myspace"/>  
+	</bean>
+	
+	<!-- mybatis spring sqlSessionTemplate,使用时直接让spring注入即可 -->
+	<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" index="0" />
+	</bean>
+
+	<!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
+	<bean
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		id="transactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<tx:annotation-driven proxy-target-class="true"
+		transaction-manager="transactionManager" />
+
+	<!-- ********************springmvc配置********************************************** -->
+
+	<!-- controller等控制器注解配置 -->
+	<mvc:annotation-driven />
+
+	<!-- 视图控制器配置 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView"></property>
+		<property name="prefix" value="/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+	<!-- 文件上传下载 -->
+	<bean
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+		id="multipartResolver">
+		<property value="utf-8" name="defaultEncoding" />
+		<property value="880000" name="maxUploadSize" />
+		<property value="40960" name="maxInMemorySize" />
+	</bean>
+
+	<!-- ********************静态资源配置********************************************** -->
+
+	<!-- 加载静态资源js文件css文件图片等 -->
+	<mvc:resources location="/js/" mapping="/js/**" />
+	<mvc:resources location="/css/" mapping="/css/**" />
+	<mvc:resources location="/img/" mapping="/jpg/**" />
+	<mvc:resources location="/html" mapping="/html/**" />
+	<mvc:resources location="/img/" mapping="/png/**" />
+	<mvc:resources location="/img/" mapping="/gif/**" />
+
+</beans>

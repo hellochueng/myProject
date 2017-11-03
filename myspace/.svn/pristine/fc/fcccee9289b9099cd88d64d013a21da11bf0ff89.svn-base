@@ -1,0 +1,11 @@
+package groupthree.myspace.lzz.mapper;
+
+import groupthree.myspace.bean.friend;
+
+import java.util.List;
+
+public interface LzzFriend_Mapper {
+	
+	List<friend> getFriendAll(Integer id);
+	
+}

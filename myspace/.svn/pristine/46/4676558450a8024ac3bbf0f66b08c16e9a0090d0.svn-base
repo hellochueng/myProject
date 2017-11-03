@@ -1,0 +1,236 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>FeedLive Website Template | Home :: W3layouts</title>
+<link rel="stylesheet" href="all/css/bootstrap.css" />
+<link rel="stylesheet" href="all/css/bootstrap-theme.min.css" />
+<link href="all/css/selfStyle.css" rel="stylesheet" />
+<link rel="stylesheet" href="all/css/fileUpLoad.css" />
+<link rel="stylesheet" href="all/css/setInfoStyle.css" />
+<link rel="stylesheet" href="all/css/chatStyle.css" />
+<link href="all/css/date.css" rel="stylesheet" />
+<link rel="stylesheet" href="all/css/topNav.css" />
+<link rel="stylesheet" href="all/css/downTip.css" />
+<link rel="stylesheet" href="all/css/addFriendButton.css" />
+
+<link href="all/css/sweetalert2.css" rel="stylesheet" type="text/css" />
+<link href="all/css/date.css" rel="stylesheet" />
+<!-- 相册链接 -->
+<link rel="stylesheet" href="all/css/style.css" type="text/css"/>
+<link href="all/css/MainStyle.css" rel="stylesheet" />
+
+<script src="all/js/aldum.js"></script>
+
+<script src="all/js/jquery-3.2.1.js"></script>
+<script src="all/js/date.js"></script>
+<script type="text/javascript" src="all/js/sweetalert2.js"></script>
+<script type="text/javascript" src="all/js/setInfoView.js"></script>
+<script type="text/javascript" src="all/js/fileUpLoad.js"></script>
+<script src="all/js/topNav.js"></script>
+<script src="all/js/main.js"></script>
+
+<script type="text/javascript" src="all/js/downTip.js"></script>
+
+</head>
+<body>
+	<div class="head-v3"></div>
+
+	<div id="person">
+		<a><img id="pseronBigImg" src="all/images/main2.jpg" /></a><font
+			class="username" style="margin-left: 20px; margin-top: 25px"
+			color="#000000" id="bigName">我是胖虎</font><div id="boyorgirl" class="girl"></div>
+	</div>
+
+	<!---start-sidebar---->
+	<div class="wrap">
+		<div class="left-sidebar">
+			<div class="logo">
+				<img src="all/images/myspace.png" title="logo"
+					style="width: 100%; height: 100%;" />
+				<h1 class="username">某某的主页</h1>
+			</div>
+			<div class="top-nav">
+				<ul>
+					<li><a href="javaScript:showImgLog()">说说</a></li>
+					<li><a href="javaScript:showFriends()">好友</a></li>
+					<li><a href="javaScript:setAldum()">相册</a></li>
+					<li><a href="javaScript:setInfo()">个人资料</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div style="margin-left: 25%">
+			<!----start-content----->
+			<div class="content" id="ImgLog">
+				<div class="grids">
+
+
+					<div class="grid box">
+						<div class="grid-header">
+							<h3>今天我胖虎发了一条说说你们快来点赞</h3>
+							<ul>
+								<li><span>胖虎发说说的时间2017-8-8</span></li>
+								<li><a href="#">几条评论</a></li>
+							</ul>
+						</div>
+						<div class="grid-img-content">
+							<img src="all/images/1.jpg" />
+						</div>
+						<div class="clear"></div>
+						<font> Lorem ipsum dolor sit amet, consectetur adipisicing
+						</font>
+					</div>
+					<div class="comments">
+						<ul>
+							<li><a href="#"><img src="all/images/likes.png"
+									title="likes" /></a></li>
+							<li>
+								<div class="input-group" class="returnMsg">
+									<input type="text" class="form-control bigInput"> <span
+										class="input-group-btn">
+										<button class="btn btn-default" type="button">回复</button>
+									</span>
+								</div>
+							</li>
+						</ul>
+						<div class="clear">评论内容</div>
+					</div>
+
+
+				</div>
+			</div>
+
+
+			<!--聊天界面-->
+			<div id="chat">
+				<div class="sidebar">
+					<div class="m-card">
+						<header>
+							<img class="avatar" width="40" height="40" alt="Coffce"
+								src="all/img/1_copy.jpg">
+							<p class="name" id="chatFriend">当前聊天昵称</p>
+						</header>
+						<footer>
+							<input class="search" placeholder="search user...">
+						</footer>
+					</div>
+					<!--加载好友列表-->
+					<div style="overflow: hidden;">
+						<div class="m-list" id="friendList"></div>
+					</div>
+				</div>
+				<div class="main">
+					<div class="m-message" value="" id="message">
+						<ul id="messageList">
+						</ul>
+					</div>
+
+					<div class="m-text">
+						<textarea id="sendMessage" placeholder="按 Ctrl + Enter 发送">
+						</textarea>
+					</div>
+				</div>
+			</div>
+
+
+			<!-- 相册的区域别乱动 -->
+			<div id="aldum" class="jumbotron aldum">
+				<div id="navigation">
+					<ul id="sortable">
+					    <li><a href="#"><span>新建相册</span></a><>
+					    <li><a href="#"><span>修改相册</span></a><>
+					    <li><a href="#"><span>删除相册</span></a><>
+					   
+					</ul>
+				</div>
+				<div id="Allaldum" >
+				</div>
+			
+			</div>
+
+
+			<!-- 个人资料别乱动 -->
+			<div id="Info" class="jumbotron Info">
+				<section class='container'>
+					<form method="post" enctype="multipart/form-data" id="uploadForm">
+						<fieldset class='alpha'>
+							<legend>
+								<b>1.</b> 个人信息
+							</legend>
+							<div class='frow'>
+								<input class='item' id="name" name="name" placeholder='昵称' type='text'>
+							</div>
+							<div class='frow'>
+								<input class='item' id="signature" name="signature" placeholder='个性签名' type='text'>
+							</div>
+							<div class='frow'>
+								<a class='next-step' href='#'>下一步</a>
+							</div>
+						</fieldset>
+						<!-- / Fieldset Beta -->
+						<fieldset class='beta'>
+							<legend>
+								<b>2.</b>你的信息
+							</legend>
+							<div class='frow'>
+								<select class='item' id="sex" style="width: 100%;height: 50px" name="sex" placeholder='女' required='required'><option value="男">男</option><option value="女">女</option></select>
+							</div>
+							<div class='frow'>
+								<input name="birthday" id="birthday" class="jcDate jcDateIco item" placeholder='生日' readonly="readonly">
+							</div>
+							
+							<div class='frow'>
+								<a class='prev-step' href='#'>上一步</a>
+							</div>
+							<div class='frow'>
+								<a class='next-step' href='#'>下一步</a>
+							</div>
+						</fieldset>
+						<!-- / Fieldset Charlie -->
+						<fieldset class='charlie'>
+							<legend>
+								<b>3.</b>头像
+							</legend>
+							<div class='frow'>
+								<div class="container">
+	
+    	<div class="page-header">
+            <div class="form-group">
+                <div class="h4">本地上传头像</div>
+                <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
+                    <div class="fileinput-new thumbnail" style="width: 200px;height: auto;max-height:150px;">
+                        <img id="picImg" style="width: 100%;height: auto;max-height: 140px;" src="all/images/1.jpg" alt="">
+                    </div>
+                    <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                    <div>
+                        <span class="btn btn-primary btn-file">
+                            <span class="fileinput-new">本地选择</span>
+                            <span class="fileinput-exists">换一张</span>
+                            
+                            <input type="file" name="imgFile" id="picID" accept="image/gif,image/jpeg,image/x-png">
+                            
+                        </span>
+                        <a href="javascript:;" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">移除</a>
+                    </div>
+                </div>
+                
+            </div>
+    </div>
+</div>
+							</div>
+							<div class='frow'>
+							 <a class='prev-step' href='#'>上一步</a>
+							</div>
+							<div class='frow'>
+								<button>确认修改</button>
+							</div>
+						</fieldset>
+					</form>
+				</section>
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>

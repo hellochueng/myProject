@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>FeedLive Website Template | Home :: W3layouts</title>
+<link rel="stylesheet" href="all/css/bootstrap.css" />
+<link rel="stylesheet" href="all/css/bootstrap-theme.min.css" />
+<link rel="stylesheet" href="all/css/chatStyle.css" />
+<link href="all/css/MainStyle.css" rel="stylesheet" />
+<link rel="stylesheet" href="all/css/topNav.css" />
+<link rel="stylesheet" href="all/css/downTip.css" />
+<link rel="stylesheet" href="all/css/addFriendButton.css" />
+<link href="all/css/sweetalert2.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="all/css/tipStyle.css" />
+<script type="text/javascript" src="all/js/sweetalert2.js"></script>
+<script src="all/js/jquery-3.2.1.js"></script>
+<script src="all/js/addFriend.js"></script>
+<script src="all/js/topNav.js"></script>
+</head>
+<body>
+	<div class="head-v3"></div>
+	
+	<!-- <div class="help-tip" style="width: 100px;height: 100px;border: 2px soild red;">
+				<p><img src="images/balloon.jpg" width="300"></p>
+	</div> -->
+	<!--加好友界面-->
+	<div style="padding-left:3%;width: 50%;margin-top:10%;margin-left: 23%;overflow: hidden;">
+	<div class="addFriendView">
+	
+		<ul class="addView" >
+				<li>
+				<img src="all/img/1_copy.jpg" style="width: 50px;height: 50px;float: left">
+					<h2 style="color: red;">用户昵称</h2>
+					<h3 >男女</h3>
+					<p style="height: 50px;">
+					    个性签名
+					</p>
+					<p>
+						<a href="javascript:;"><span>加为好友</span></a>
+					</p>
+				</li>
+		</ul>
+		</div>
+	</div>
+</body>
+</html>

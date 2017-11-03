@@ -1,0 +1,36 @@
+package groupthree.myspace.lzz.test;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import groupthree.myspace.bean.person;
+import groupthree.myspace.lzz.mapper.Person_Mapper;
+import oracle.sql.DATE;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class tttttt {
+	public static void main(String[] args) {
+		ApplicationContext a = new ClassPathXmlApplicationContext("spring.xml");
+		SqlSession ss = (SqlSession) a.getBean("sqlSessionTemplate");
+		System.out.println(ss);
+		Person_Mapper pm = ss.getMapper(Person_Mapper.class);
+		person p = new person();
+		p.setId(5);
+		p.setName("张三");
+		//DateFormat format= new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒");
+		//p.set(new DATE().toString());
+		p.setSignature("ddd");
+		p.setSex("女");
+		p.setImg("sadas");
+		p.setSpace(123456);
+		p.setPwd("123456");
+		p.setCreate_time(new DATE().toString());
+		p.setBirthday(new DATE().toString());
+		System.out.println(p);
+		System.out.println(pm.personRegister(p));
+	}
+}

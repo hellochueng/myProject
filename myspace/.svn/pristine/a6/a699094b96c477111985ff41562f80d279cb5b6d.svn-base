@@ -1,0 +1,102 @@
+package groupthree.myspace.lzz.dao.daoImpl;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import groupthree.myspace.bean.friendApply;
+import groupthree.myspace.bean.imgLog;
+import groupthree.myspace.bean.imgLogCmt;
+import groupthree.myspace.bean.imgLogLiker;
+import groupthree.myspace.bean.logImg;
+import groupthree.myspace.bean.person;
+import groupthree.myspace.lzz.dao.LzzPersonDao;
+import groupthree.myspace.lzz.mapper.LzzPerson_Mapper;
+
+@Repository(value="LzzPersonDao")
+public class LzzPersonDaoImpl extends LzzBaseDao implements LzzPersonDao{
+
+	@Override
+	public person login(person person) {
+		return getMapper(LzzPerson_Mapper.class).personLogin(person);
+	}
+
+	@Override
+	public int register(person person) {
+		return getMapper(LzzPerson_Mapper.class).personRegister(person);
+	}
+
+	@Override
+	public int changePersonInfo(person person) {
+		return getMapper(LzzPerson_Mapper.class).changePersonInfo(person);
+	}
+
+	@Override
+	public List<person> getPersonAll(Integer id) {
+		return getMapper(LzzPerson_Mapper.class).getPersonAll(id);
+	}
+
+	@Override
+	public int applyFriend(friendApply friendApply) {
+		return getMapper(LzzPerson_Mapper.class).applyFriend(friendApply);
+	}
+
+	@Override
+	public List<friendApply> getAllApply() {
+		return getMapper(LzzPerson_Mapper.class).getAllApply();
+	}
+
+	@Override
+	public int isSendApply(friendApply friendApply) {
+		
+		return getMapper(LzzPerson_Mapper.class).isSendApply(friendApply);
+	}
+
+	@Override
+	public List<imgLog> getPersonImgLog(Integer id) {
+		return getMapper(LzzPerson_Mapper.class).getPersonImgLog(id);
+	}
+
+	@Override
+	public List<imgLogCmt> getImgLogCmt(Integer id) {
+		return getMapper(LzzPerson_Mapper.class).getImgLogCmt(id);
+	}
+
+	@Override
+	public List<imgLogLiker> getPersonImgLogLiker(Integer id) {
+		return getMapper(LzzPerson_Mapper.class).getLikers(id);
+	}
+
+	@Override
+	public int addLog(imgLog imgLog) {
+		return getMapper(LzzPerson_Mapper.class).addLog(imgLog);
+	}
+
+	@Override
+	public int deleteLog(Integer id) {
+		return getMapper(LzzPerson_Mapper.class).deleteLog(id);
+	}
+
+	@Override
+	public imgLogLiker IsLiker(imgLogLiker imgLogLiker) {
+		
+		return getMapper(LzzPerson_Mapper.class).IsLiker(imgLogLiker);
+	}
+
+	@Override
+	public int addLogLiker(imgLogLiker imgLogLiker) {
+		return getMapper(LzzPerson_Mapper.class).addLogLiker(imgLogLiker);
+	}
+
+	@Override
+	public int likeLog(Integer is_delete, Integer id) {
+		
+		return getMapper(LzzPerson_Mapper.class).likeLog(is_delete, id);
+	}
+
+	@Override
+	public int sendCmt(imgLogCmt imgLogCmt) {
+		return getMapper(LzzPerson_Mapper.class).sendCmt(imgLogCmt);
+	}
+	
+}

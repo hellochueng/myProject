@@ -1,0 +1,45 @@
+package groupthree.myspace.bean;
+
+public class friend {
+	private Integer friend_id;
+	private String remark;
+	private String create_time;
+	private Integer is_delete;
+	
+	
+	public Integer getFriend_id() {
+		return friend_id;
+	}
+	public void setFriend_id(Integer friend_id) {
+		this.friend_id = friend_id;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	public String getCreate_time() {
+		return create_time;
+	}
+	public void setCreate_time(String create_time) {
+		this.create_time = create_time;
+	}
+	public Integer getIs_delete() {
+		return is_delete;
+	}
+	public void setIs_delete(Integer is_delete) {
+		this.is_delete = is_delete;
+	}
+	public friend(Integer friend_id, String remark, String create_time,
+			Integer is_delete) {
+		super();
+		this.friend_id = friend_id;
+		this.remark = remark;
+		this.create_time = create_time;
+		this.is_delete = is_delete;
+	}
+	public friend() {
+		super();
+	}
+}

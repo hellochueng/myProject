@@ -1,0 +1,12 @@
+package groupthree.myspace.lzz.dao;
+
+import java.util.List;
+
+import groupthree.myspace.bean.person;
+
+public interface LzzPersonDao {
+	person login(person person);
+	int register(person person);
+	int changePersonInfo(person person);
+	List<person> getPersonAll(Integer id);
+}

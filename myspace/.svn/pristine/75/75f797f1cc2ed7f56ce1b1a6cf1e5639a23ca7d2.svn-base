@@ -1,0 +1,254 @@
+var msg2="";
+
+/*显示所有相册*/
+function zmhSetAldum(){
+	 $.get("/myspace/zmhperson/showAldum.do",{},function(data){
+			var items=$.parseJSON(data)
+			var msg="";
+			for(var i=0;i<items.length;i++){
+			  if(items[i].is_delete==0)
+				  msg+='<div class="image-box" id="image-box"><div class="photo-cover" id="photo-cover"><a href="javascript:getPicture('+items[i].id+')" ><img src="all/aldum_images/beauty_girl.jpg" width="166px" height="106px" /></a><p class="photo-name">'+items[i].aldumName+'<br>'+items[i].create_time+'</p></div><input type="checkbox" id="'+items[i].id+'" value="'+items[i].id+'" style="display:none" /></div>'	
+			}
+			$("#Allaldum").html(msg)
+		})
+}
+
+/*显示所有图片*/
+function getPicture(id){
+	 $("#aldum").prop("value",id);
+	 $.get("/myspace/zmhperson/showPicture.do",{"id":id},function(data){
+	  
+  	   var pictures=$.parseJSON(data)
+  	   $("#Allaldum").html("")
+  	   $("#navigation").hide()
+  	   var msg=""
+  	   for(var i=0;i<pictures.length;i++){	 		 
+  		   msg+='<div class="image-box" value="'+pictures[i].id+'" id="singlePicture"><div class="photo-cover" id="photocover"><a href="'+pictures[i].picture+'" class="big-image"></a><img src="'+pictures[i].picture+'" width="166px" height="106px" value="'+pictures[i].id+'"/><p class="photo-name">'+pictures[i].create_time+'</p></div><input type="checkbox"  value="'+pictures[i].id+'" style="display:none"/></div>'		    	    
+  	     
+  	   }
+  	 $("#AboutPicture").show()
+  	 $("#Allaldum").html(msg)
+  	 $("#upImg").hide();
+  	 $("#deleteBox").hide();
+	 })	    	
+	
+}
+
+/*返回相册界面*/
+function returns(){
+	 $("#AboutPicture").hide()
+	 $("#Allaldum").html(msg2)
+	 $("#navigation").show()
+	 $("#newAldumBox").hide()
+	 $("#updateAldumBox").hide()
+	 $("#deleteAldumBox").hide()
+	 zmhSetAldum()
+}
+
+/*新建相册*/
+function newAldum(){
+	$("#newAldumBox").show()
+	$("#updateAldumBox").hide()
+	 $("#deleteAldumBox").hide()
+}
+
+
+function New_confure(){
+	var aldum=$("#aldumName").val();
+	if(aldum==""){
+		swal('出错了','相册名不能为空','error')
+	}
+	$.ajax({
+		type:"get",
+		url:"/myspace/zmhperson/newAldum.do",
+		async:false,
+		data:{"aludmName":aldum},
+		success:function(data){
+			zmhSetAldum()
+		}
+	})
+	$("#newAldumBox").hide()
+	
+}
+
+function New_cancel(){
+	$("#newAldumBox").hide()
+}
+/*上传照片*/
+function transform(){
+	
+    $("#upImg").show()	
+	$("#aludumId").val($("#aldum").prop("value"));
+    /*var formData = new FormData($('#pictureFrom')[0]);
+		$.ajax({
+			type:"post",
+			url:"/myspace/zmhperson/transfrom.do",
+			data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success:function(date){
+            	
+            }
+		});*/
+
+	$("#upImgConfire").click(function(){
+		var str=$("#upFile").val();
+		if(str.length==0){
+			swal('出错了','请选择照片','error')
+			return false;
+		}
+		$("#upImg").hide()	
+	})
+	
+	$("#upImgCancle").click(function(){
+		$("#upImg").hide()	
+	})
+    
+}
+
+/*删除照片*/
+function deletePicture(){
+	if($("#singlePicture #photocover").children('img').length!=0){
+		$("input[type='checkbox']").show()
+		$("#deleteBox").show()
+	}else{
+		swal('出错了','当前照片为空','error')
+	}
+	
+}
+function confireDel(){
+	/*$("#singlePicture #photocover>img").each(function(){
+		alert($(this).attr("value") )
+	})
+	*/
+      var items=""
+	  var len = $("input:checkbox:checked").length;
+      if(len==0){
+    	  swal('出错了','请选择照片','error')
+      }
+      $(":checkbox").each(function(){	
+		if(this.checked ==true){
+			items+=$(this).attr("value")+"," 
+	    }		
+	  })  
+		$("#deleteBox").hide()
+		$("input[type='checkbox']").hide()
+		$.get("/myspace/zmhperson/deletePicture.do",{"items":items},function(data){
+			
+		})
+		getPicture($("#aldum").prop("value"));
+
+}
+
+function pictureDelCancel(){
+	$("#deleteBox").hide()
+    $("input[type='checkbox']").hide()
+}
+/*修改相册(相册名)*/
+
+function updateAldum(){
+	$("#updateAldumBox").show()
+	$("#newAldumBox").hide()
+	 $("#deleteAldumBox").hide()
+	$("input[type='checkbox']").show()
+	var updateCheck=$("input:checkbox")
+	updateCheck.click(function(){
+		if(this.checked || this.checked=='checked')
+			updateCheck.removeAttr("checked");
+		    $(this).prop("checked", true);
+	    })
+ }
+
+function Update_confure(){
+	var aldumName=$("#update_aldumName").val();
+	if(aldumName==""){
+		swal('出错了','相册名不能为空','error')
+	}
+	var aldumId=""
+	$(":checkbox").each(function(){
+		if(this.checked == true){
+			aldumId=$(this).val()
+		}
+	})
+   
+   /*$.ajax({
+		type:"get",
+		url:"/myspace/zmhperson/updateAldum.do",
+		async:false,
+		data:{"aldumId":aldumId},
+		
+		success:function(data){
+		}
+	})*/
+	$.get("/myspace/zmhperson/updateAldum.do",{"aldumName":aldumName,"aldumId":aldumId},function(data){
+		zmhSetAldum()
+	})
+	$("#updateAldumBox").hide()
+	$("input[type='checkbox']").hide()
+	
+}
+
+function Update_cancel(){
+	$("#updateAldumBox").hide()
+	$("input[type='checkbox']").hide()
+}
+
+/*删除相册*/
+function deleteAldum(){
+	if($("#Allaldum").children('div').length!=0){
+		$("#deleteAldumBox").show()
+		$("input[type='checkbox']").show()
+	}else{
+		swal('出错了','当前相册为空','error')
+	}
+	$("#deleteAldumBox").show()
+	$("#updateAldumBox").hide()
+	$("#newAldumBox").hide()
+	$("input[type='checkbox']").show()
+}
+
+function Delete_confure(){
+	$("input[type='checkbox']").show()
+    var items=""
+	  var len = $("input:checkbox:checked").length;
+     if(len==0){
+  	  swal('出错了','请选择照片','error')
+     }
+     $(":checkbox").each(function(){	
+		if(this.checked ==true){
+			items+=$(this).attr("value")+"," 
+	    }		
+	  })  
+
+	  $.get("/myspace/zmhperson/deleteAldum.do",{"items":items},function(data){
+		  zmhSetAldum()
+	  })
+	  
+	  $("#deleteAldumBox").hide()
+	  $("input[type='checkbox']").hide()
+	 
+}
+
+function Delete_cancel(){
+	$("input[type='checkbox']").hide()
+	$("#deleteAldumBox").hide()
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,6 @@
+package groupthree.myspace.bean;
+
+public class logImg {
+	private Integer id;
+	private String logImg;
+}

@@ -1,0 +1,94 @@
+package groupthree.myspace.hjn.service.imp;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import groupthree.myspace.bean.person;
+import groupthree.myspace.hjn.dao.HPersonDao;
+import groupthree.myspace.hjn.dao.imp.HPersonDaoImp;
+import groupthree.myspace.hjn.service.HPersonService;
+
+
+@Service(value="HPersonServiceImp")
+public class HPersonServiceImp implements HPersonService {
+
+	@Resource(name="HPersonDaoImp")HPersonDao dao;
+
+	@Override
+	public int updatePersonById(int id,int i) {
+		 dao.updatePersonById(id,i);
+		 return 1;
+	}
+
+	@Override
+	public int updateImgLogById(int id) {
+		dao.updateImgLogById(id);
+		return 1;
+	}
+
+	@Override
+	public int updateAldumById(int id) {
+		dao.updateAldumById(id);
+		return 1;
+	}
+
+	@Override
+	public int updateImgLogCmtById(int id) {
+		dao.updateImgLogCmtById(id);
+		return 1;
+	}
+
+	@Override
+	public int updatePictureById(int id) {
+
+		dao.updatePictureById(id);
+		return 1;
+	}
+
+	@Override
+	public int updateFriendById(int id) {
+		dao.updateFriendById(id);
+		return 1;
+	}
+
+	@Override
+	public int updatePersonNameById(int id, String name) {
+		dao.updatePersonNameById(id, name);
+		return 1;
+	}
+
+	@Override
+	public int updatePersonPwdById(int id, String pwd) {
+		dao.updatePersonPwdById(id, pwd);
+		return 1;
+	}
+
+	@Override
+	public int updatePersonSexById(int id,String sex) {
+		dao.updatePersonSexById(id, sex);
+		return 1;
+	}
+
+	@Override
+	public int updatePersonBirById(int id, String birthday) {
+		dao.updatePersonBirById(id, birthday);
+		return 1;
+	}
+
+	@Override
+	public int updatePersonImgById(int id, String img) {
+		dao.updatePersonImgById(id, img);
+		return 1;
+	}
+
+	@Override
+	public int updatePersonSignById(int id, String signature) {
+		dao.updatePersonSignById(id, signature);
+		return 1;
+	}
+
+
+}

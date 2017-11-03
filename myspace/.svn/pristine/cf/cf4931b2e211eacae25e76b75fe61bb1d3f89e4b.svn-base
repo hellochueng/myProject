@@ -1,0 +1,51 @@
+package groupthree.myspace.hjn.dao.imp;
+
+import groupthree.myspace.hjn.dao.HBasicDao;
+import groupthree.myspace.hjn.dao.HPersonDao;
+import groupthree.myspace.hjn.mapper.HPersonMapper;
+
+import org.springframework.stereotype.Repository;
+
+
+@Repository(value="HPersonDaoImp")
+public class HPersonDaoImp extends HBasicDao implements HPersonDao{
+	
+	@Override
+	public int updatePersonById(int id) {
+		getMapper(HPersonMapper.class).updatePersonById(id);
+		return 1;
+	}
+
+	@Override
+	public int updateImgLogById(int id) {
+		getMapper(HPersonMapper.class).updateImgLogById(id);
+		return 1;
+	}
+
+	@Override
+	public int updateAldumById(int id) {
+		getMapper(HPersonMapper.class).updateAldumById(id);
+		return 1;
+	}
+
+	@Override
+	public int updateImgLogCmtById(int id) {
+		getMapper(HPersonMapper.class).updateImgLogCmtById(id);
+		return 1;
+	}
+
+	@Override
+	public int updatePictureById(int id) {
+		getMapper(HPersonMapper.class).updatePictureById(id);
+		return 1;
+	}
+
+	@Override
+	public int updateFriendById(int id) {
+		getMapper(HPersonMapper.class).updateFriendById(id);
+		return 1;
+	}
+
+	
+	
+}

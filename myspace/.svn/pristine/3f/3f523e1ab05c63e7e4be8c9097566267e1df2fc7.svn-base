@@ -1,0 +1,42 @@
+package groupthree.myspace.bean;
+
+import org.apache.ibatis.type.Alias;
+import org.springframework.stereotype.Component;
+
+/**
+ * 
+ * @author lzz
+ * 说说图片实体类
+ */
+@Component
+@Alias("logimg")
+public class logImg {
+	private Integer id;
+	//说说图片路径
+	private String logImg;
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getLogImg() {
+		return logImg;
+	}
+	public void setLogImg(String logImg) {
+		this.logImg = logImg;
+	}
+	@Override
+	public String toString() {
+		return "logImg [id=" + id + ", logImg=" + logImg + "]";
+	}
+	public logImg(Integer id, String logImg) {
+		super();
+		this.id = id;
+		this.logImg = logImg;
+	}
+	public logImg() {
+		super();
+	}
+}

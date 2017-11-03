@@ -1,0 +1,65 @@
+package groupthree.myspace.hjn.controller;
+
+import groupthree.myspace.hjn.service.HPersonService;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller(value="HjnPersonController")
+@RequestMapping(value="/hjn",produces="text/plain;charset=utf-8")
+public class HjnPersonController {
+	
+	
+	@Resource(name="HPersonServiceImp")HPersonService hPersonService;
+	//删除用户
+	@RequestMapping(value="/deleteP/{id}/{i}")
+	public String updatePersonById(@PathVariable("id")int id,@PathVariable("i")int i){
+		hPersonService.updatePersonById(id,i);
+		return "zfl/index";	
+	}
+	//删除说说
+	@RequestMapping(value="/deleteSS")
+	public String updateImgLogById(@PathVariable("id")int id){
+		hPersonService.updateImgLogById(id);
+		return "zfl/index";
+	}
+	//删除说说评论
+	@RequestMapping(value="/deleteSSPL")
+	public String updateImgLogCmtById(@PathVariable("id")int id){
+		hPersonService.updateImgLogCmtById(id);
+		return "zfl/index";
+	}
+	//删除相册
+	@RequestMapping(value="/deleteXC")
+	public String updateAldumById(@PathVariable("id")int id){
+		hPersonService.updateAldumById(id);
+		return "zfl/index";
+	}
+	//删除相片
+	@RequestMapping(value="/deleteXP")
+	public String updatePictureById(@PathVariable("id")int id){
+		hPersonService.updatePictureById(id);
+		return "zfl/index";
+	}
+	//删除好友
+	@RequestMapping(value="/deleteHY")
+	public String updateFriendById(@PathVariable("id")int id){
+		hPersonService.updateFriendById(id);
+		return "zfl/index";
+	}
+	//修改用户个人属性
+	@RequestMapping(value="/updatePerson")
+	public String updatePersonInfo(@PathVariable("id")int id,@PathVariable("info")String info){
+		hPersonService.updatePersonNameById(id, info);
+		hPersonService.updatePersonPwdById(id, info);
+		hPersonService.updatePersonSexById(id,info);
+		hPersonService.updatePersonBirById(id, info);
+		hPersonService.updatePersonImgById(id, info);
+		hPersonService.updatePersonSignById(id, info);
+		return "zfl/index";
+	}
+	
+}

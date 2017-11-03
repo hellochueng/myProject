@@ -1,0 +1,8 @@
+package groupthree.myspace.bean;
+
+public class logLiker {
+	private Integer id;
+	private Integer liker_id;
+	private String create_time;
+	
+}

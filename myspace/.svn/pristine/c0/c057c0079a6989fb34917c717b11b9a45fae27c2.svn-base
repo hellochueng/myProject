@@ -1,0 +1,52 @@
+package groupthree.myspace.hjn.controller;
+
+import groupthree.myspace.hjn.service.HPersonService;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller(value="HjnPersonController")
+@RequestMapping(value="/hjn",produces="text/plain;charset=utf-8")
+public class HjnPersonController {
+	
+	@Resource(name="HPersonServiceImp")HPersonService hPersonService;
+	//删除用户
+	@RequestMapping(value="/deleteP")
+	public int updatePersonById(int id){
+		hPersonService.updatePersonById(id);
+		return 1;	
+	}
+	//删除说说
+	@RequestMapping(value="/deleteSS")
+	public int updateImgLogById(int id){
+		hPersonService.updateImgLogById(id);
+		return 1;
+	}
+	//删除说说评论
+	@RequestMapping(value="/deleteSSPL")
+	public int updateImgLogCmtById(int id){
+		hPersonService.updateImgLogCmtById(id);
+		return 1;
+	}
+	//删除相册
+	@RequestMapping(value="/deleteXC")
+	public int updateAldumById(int id){
+		hPersonService.updateAldumById(id);
+		return 1;
+	}
+	//删除相片
+	@RequestMapping(value="/deleteXP")
+	public int updatePictureById(int id){
+		hPersonService.updatePictureById(id);
+		return 1;
+	}
+	//删除好友
+	@RequestMapping(value="/deleteHY")
+	public int updateFriendById(int id){
+		hPersonService.updateFriendById(id);
+		return 1;
+	}
+}

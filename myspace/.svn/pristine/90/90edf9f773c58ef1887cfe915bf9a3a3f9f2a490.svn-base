@@ -1,0 +1,326 @@
+jQuery(document).ready(function() {
+	goAjax();
+	var chatLogSet;
+	setTopNav();
+	setName();
+	showImgLog();
+});
+
+function returnLog(id,dom){
+	alert($(dom).prev(":input"))
+}
+
+function setName() {
+	$.ajax({
+		url : "/myspace/personAction/setPersonInfo.do",
+		async : false,
+		dataType : "json",
+		success : function(data) {
+			$(".username").text(data.name);
+			$("#sPersonImg").prop("src",data.img);
+			$("#pseronBigImg").prop("src",data.img);
+			$("#name").val(data.name);
+			$("#sex").val(data.sex);
+			$("#birthday").val(data.birthday);
+			$("#signature").val(data.signature);
+			$("#panghu").html(data.name+'<img src="'+data.img+'" style="height:100px;width:130px;"/><button style="color:black;width:85%" onclick="perosnExist()">退出</buttion>');
+			if(data.sex=="女"){
+				if($("#boyorgirl").hasClass("boy"))
+					$("#boyorgirl").removeClass("boy")
+				$("#boyorgirl").addClass("girl")
+			}else{
+				if($("#boyorgirl").hasClass("girl"))
+					$("#boyorgirl").removeClass("girl")
+				$("#boyorgirl").addClass("boy")
+			}
+		}
+	});
+}
+
+function showImgLog() {
+	// chatLogSet.clearInterval();
+	$("#chat").hide();
+	$("#aldum").hide();
+	$("#Info").hide();
+	$("#ImgLog").fadeIn('2000');
+	$.ajax({
+		type:"get",
+		url:"/myspace/personAction/getImgLog.do",
+		async : false,
+		dataType:"json",
+		success:function(data){
+			var body="";
+			for(var i =0;i<data.length;i++){
+				if(data[i].is_delete==0){
+					var j = i+1;
+					body+='<br/><br/><hr/><br/><br/><div class="grid box"><div class="grid-header">';
+					body+='<h3> <button class="btn btn-default" onclick="deleteLog('+data[i].id+')">删除</button>本人的第'+j+'条说说</h3><ul>';
+					body+='<li class="top_f"><span>于'+data[i].create_time+'发表</span></li><li>';
+					body+='<a href="#" class="top_f">共'+data[i].imgLogCmt_list.length+'条评论</a></li></ul></div><div class="grid-img-content">';
+					body+='<img src="'+data[i].imgSrc+'" /></div><div class="clear"></div>';
+					body+='<font class="topFont">'+data[i].imgLog_content+'</font></div><div class="comments"><ul>';
+					body+='<li><a href="javaScript:likerLog('+data[i].id+')"><img src="all/images/likes.png"title="likes" /></a>';
+					if(data[i].logLiker_list.length>0){
+						for(var j =0;j<data[i].logLiker_list.length;j++){
+							body+=data[i].logLiker_list[j].name+',';
+						}
+						body+=data[i].logLiker_list.length+'人赞了你';
+					}
+					body+='</li><li><div class="input-group" class="returnMsg"><input type="text" class="form-control bigInput"><span class="input-group-btn">';
+					body+='<button class="btn btn-default" onclick="returnLog('+data[i].id+',this)" type="button">回复</button></span></div>';
+					body+='</li></ul><div class="clear">评论内容</div></div>';
+				}
+			}
+			$(".grids").html(body);
+		}
+	});
+	// 放在最后面
+	window.clearInterval(chatLogSet);
+}
+
+function likerLog(id){
+	$.ajax({
+		type:"get",
+		url:"/myspace/personAction/likeLog.do",
+		data:"log_Id="+id,
+		success:function(data){
+				showImgLog();
+		}
+	});
+}
+
+function deleteLog(id){
+	$.ajax({
+		type:"get",
+		url:"/myspace/personAction/deleteLog.do",
+		data:"log_Id="+id,
+		success:function(data){
+			if(data=="ok")
+				showImgLog();
+			else
+				swal('出错了','删除失败:)','error')
+		}
+	});
+}
+
+function showFriends() {
+	$("#ImgLog").hide();
+	$("#aldum").hide();
+	$("#Info").hide();
+	$("#chat").fadeIn('slow');
+	$.ajax({
+				type : "get",
+				async : false,
+				url : "/myspace/friendAction/setFriendList.do",
+				dataType : "json",
+				success : function(data) {
+					if (data.length > 0) {
+						var list = '';
+						for (var i = 0; i < data.length; i++) {
+							if (data[i].is_delete == 0) {
+								// alert(data[i].remark);
+								list += '<ul><li class="" value="'
+										+ data[i].friend_id
+										+ '"><img class="avatar" width="30"';
+								list += 'height="30" alt="示例介绍" src="all/img/1_copy.jpg">';
+								list += '<p class="name">' + data[i].remark
+										+ '</p></li></ul>';
+							}
+						}
+						// 把好友list显示
+						$("#friendList").html(list);
+						// 把当前聊天者的昵称显示
+						$("#chatFriend").text(
+								$("#friendList li:first p").html());
+						// 设置当前聊天者的id
+						$(".m-message").attr("value", data[0].friend_id);
+						// 将聊天记录显示
+						setChatLog();
+						setchatInterval();
+					} else {
+						$("#chatFriend").text("当前没有好友");
+					}
+				}
+			});
+
+	$("#friendList li").click(function() {
+		$(".m-message").attr("value", $(this).prop("value"));
+		$("#chatFriend").text($(this).text());
+		// 清除聊天计时器
+		window.clearInterval(chatLogSet);
+		// 设置聊天记录
+		setChatLog();
+		setchatInterval();
+	})
+}
+
+function perosnExist(){
+	$.ajax({
+		type:"get",
+		url:"/myspace/personAction/perosnExist.do",
+		success:function(data){
+			if(data=="ok"){
+				alert("退出成功，欢迎再来哟(＾Ｕ＾)ノ~ＹＯ");
+				window.location.href="/myspace/lhf/introduce.html";
+			}
+		}
+	});
+}
+
+function setAldum() {
+	$("#chat").hide();
+	$("#ImgLog").hide();
+	$("#Info").hide();
+	$("#aldum").fadeIn('slow');
+	zmhSetAldum();
+	// 放在最后面
+	window.clearInterval(chatLogSet);
+}
+
+function doStep(){
+	// Next Button
+	$('.alpha a.next-step').click(function(event) {
+		event.preventDefault();
+		// Part 1
+		if ($('.alpha').hasClass("in")) {
+			$('.alpha').removeClass("in");
+		}
+		$('.alpha').addClass("out");
+		// Part 2
+		if ($('.beta').hasClass("out")) {
+			$('.beta').removeClass("out");
+		}
+		$('.beta').addClass("in");
+	});
+
+	// Previous Button
+	$('.beta a.prev-step').click(function(event) {
+		event.preventDefault();
+		$('.alpha').removeClass("out").addClass("in");
+		
+		$('.beta').removeClass("in").addClass("out");
+	});
+	
+	$('.beta a.next-step').click(function(event) {
+		event.preventDefault();
+		// Part 2
+		if ($('.beta').hasClass("in")) {
+			$('.beta').removeClass("in");
+		}
+		$('.beta').addClass("out");
+		
+		if ($('.charlie').hasClass("out")) {
+			$('.charlie').removeClass("out");
+		}
+		
+		$('.charlie').addClass("in");
+	});
+	
+	$('.charlie a.prev-step').click(function(event) {
+		event.preventDefault();
+		
+		$('.beta').removeClass("out").addClass("in");
+		
+		$('.charlie').removeClass("in").addClass("out");
+	});
+	
+	// Submit & Complete
+	$('.charlie button').click(function() {
+		var formData = new FormData($('#uploadForm')[0]);
+		$.ajax({
+			type:"post",
+			url:"/myspace/personAction/changePersonInfo.do",
+			data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success:function(date){
+            	if(date=="ok"){
+	            	$('.alpha').removeClass("out").addClass("in");
+	        		$('.beta').removeClass("in").addClass("out");
+	        		$('.charlie').removeClass("in").addClass("out");
+            	}
+            }
+		});
+	});
+}
+
+function setInfo() {
+	// 放在最后面清除聊天计时器
+//	if(!isEmptyObject(chatLogSet))
+		
+	$("#Info").prevAll().hide();
+	$("#Info").fadeIn('slow');
+	$(".jcDate").jcDate({
+		IcoClass: "jcDateIco",
+		Event: "click",
+		Speed: 100,
+		Left: 0,
+		Top: 28,
+		format: "-",
+		Timeout: 100
+	});
+	// Active Functions
+	doStep();
+	window.clearInterval(chatLogSet);
+}
+
+function setChatLog() {
+	$.ajax({
+		type : "post",
+		url : "/myspace/friendAction/setChatLog.do",
+		data : {
+			"friend_id" : $(".m-message").attr("value")
+		},
+		async : false,
+		dataType : "json",
+		success : function(data) {
+			var chatLogset = "";
+			for (var i = 0; i < data.length; i++) {
+				if (data[i].sender_id == $(".m-message").attr("value")) {
+					chatLogset += '<li><p class="time"><span>'
+							+ data[i].create_time
+							+ '</span></p><div class="main">';
+					chatLogset += '<img class="avatar" width="30" height="30" src="all/img/1_copy.jpg">';
+					chatLogset += '<div class="text">'
+							+ data[i].content + '</div></div></li>';
+				} else {
+					chatLogset += '<li><p class="time"><span>'
+							+ data[i].create_time
+							+ '</span></p><div class="main self">';
+					chatLogset += '<img class="avatar" width="30" height="30" src="all/img/1_copy.jpg">';
+					chatLogset += '<div class="text">'
+							+ data[i].content + '</div></div></li>';
+				}
+			}
+			$("#messageList").html(chatLogset);
+			$('#message').scrollTop($('#message')[0].scrollHeight);
+		}
+	});
+}
+
+function setchatInterval() {
+	chatLogSet = setInterval(function() {
+		setChatLog();
+	}, 1500);
+}
+
+document.onkeydown = function(e) {
+	if (13 == e.keyCode && e.ctrlKey) {
+		var content = $("#sendMessage").val();
+		$.ajax({
+			url : "/myspace/friendAction/sendMessage.do",
+			type : "get",
+			async : false,
+			data : {
+				"content" : content,
+				"getter_id" : $(".m-message").attr("value")
+			},
+			success : function(data) {
+				$('#message').scrollTop($('#message')[0].scrollHeight);
+				$("#sendMessage").val("");
+			}
+		});
+	}
+}

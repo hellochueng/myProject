@@ -1,0 +1,32 @@
+package groupthree.myspace.hjn.dao;
+
+import groupthree.myspace.bean.person;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface HPersonDao {
+	
+	//删除用户通过Id
+	int updatePersonById(int id);
+	
+	//删除说说通过Id
+	int updateImgLogById(int id);
+	
+	//删除说说评论通过Id
+	int updateImgLogCmtById(int id);
+	
+	//删除相册通过Id
+	int updateAldumById(int id);
+	
+	//删除相片通过Id
+	int updatePictureById(int id);
+	
+	//删除好友
+	int updateFriendById(int id);
+	
+	
+}

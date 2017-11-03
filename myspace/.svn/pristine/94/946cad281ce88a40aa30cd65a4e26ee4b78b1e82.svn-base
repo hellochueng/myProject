@@ -1,0 +1,122 @@
+package groupthree.myspace.lzz.service.serviceImpl;
+
+import groupthree.myspace.bean.friendApply;
+import groupthree.myspace.bean.imgLog;
+import groupthree.myspace.bean.imgLogLiker;
+import groupthree.myspace.bean.person;
+import groupthree.myspace.lzz.dao.LzzPersonDao;
+import groupthree.myspace.lzz.service.LzzPersonService;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service(value="LzzPersonService")
+public class LzzPersonServiceImpl implements LzzPersonService{
+	
+	@Resource(name="LzzPersonDao")LzzPersonDao lzzPersonDao;
+	@Autowired
+	imgLogLiker liker;
+	
+	@Override
+	public person login(person person) {
+		return lzzPersonDao.login(person);
+	}
+
+	@Override
+	public boolean register(person person) {
+		person.setSex("男");
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+		person.setBirthday(sf.format(new Date()));
+		person.setCreate_time(sf.format(new Date()));
+		person.setImg("/all/img/1_copy.jpg");
+		person.setSignature("我北京人倍牛逼");
+		if(lzzPersonDao.register(person)>0)
+			return true;
+		return false;
+	}
+
+	@Override
+	public boolean changePersonInfo(person person) {
+		if(lzzPersonDao.changePersonInfo(person)>0) return true;
+		else return false;
+		
+	}
+
+	@Override
+	public List<person> getPersonAll(Integer id) {
+		return lzzPersonDao.getPersonAll(id);
+	}
+
+	@Override
+	public boolean applyFriend(friendApply friendApply) {
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+		friendApply.setSituation(0);
+		friendApply.setIs_delete(0);
+		friendApply.setCreate_time(sf.format(new Date()));
+		if(lzzPersonDao.applyFriend(friendApply)>0)
+			return true;
+		else return false;
+	}
+
+	@Override
+	public List<friendApply> getAllApply() {
+		return lzzPersonDao.getAllApply();
+	}
+
+	@Override
+	public boolean isSendApply(friendApply friendApply) {
+		friendApply.setIs_delete(0);
+		friendApply.setSituation(0);
+		if(lzzPersonDao.isSendApply(friendApply)>0)
+			return true;
+		else return false;
+	}
+
+	@Override
+	public List<imgLog> getPersonImgLog(Integer id) {
+		List<imgLog> imglog = lzzPersonDao.getPersonImgLog(id);
+		for(int i=0;i<imglog.size();i++){
+			imglog.get(i).setImgLogCmt_list(lzzPersonDao.getImgLogCmt(imglog.get(i).getId()));
+			imglog.get(i).setLogLiker_list(lzzPersonDao.getPersonImgLogLiker(imglog.get(i).getId()));
+		}
+		return imglog;
+	}
+
+	@Override
+	public boolean addLog(imgLog imgLog) {
+		imgLog.setIs_delete(0);
+		imgLog.setPermission(0);
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+		imgLog.setCreate_time(sf.format(new Date()));
+		if(lzzPersonDao.addLog(imgLog)>0)
+			return true;
+		else return false;
+	}
+
+	@Override
+	public boolean deleteLog(Integer id) {
+		if(lzzPersonDao.deleteLog(id)>0)
+			return true;
+		else return false;
+	}
+
+	@Override
+	public void likeLog(imgLogLiker imgLogLiker) {
+		liker = lzzPersonDao.IsLiker(imgLogLiker);
+		if(liker!=null)
+			if(liker.getIs_delete()==0)
+				lzzPersonDao.likeLog(1,liker.getId());
+			else
+				lzzPersonDao.likeLog(0,liker.getId());
+		else{
+			lzzPersonDao.addLogLiker(imgLogLiker);
+		}
+	}
+	
+}

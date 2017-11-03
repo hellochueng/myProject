@@ -1,0 +1,42 @@
+package groupthree.myspace.lzz.controller;
+
+import groupthree.myspace.bean.person;
+import groupthree.myspace.lzz.service.LzzPersonService;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
+
+
+@Controller(value="LzzPersonController")
+@RequestMapping("/personAction")
+public class LzzPersonController {
+	@Resource(name="LzzPersonServiceImpl")LzzPersonService lzzPersonService;
+	
+	@RequestMapping(value="/login",method=RequestMethod.POST)
+	@ResponseBody
+	public String login(person person,Model model,HttpServletRequest request) {
+		person p = lzzPersonService.login(person);
+		if(p!=null){
+			request.getSession().setAttribute("user",p);
+			return "ok";
+		}else
+			return "no";
+	}
+	
+	@RequestMapping(value="/setPersonInfo")
+	@ResponseBody
+	public String setPersonInfo(HttpServletRequest request){
+		Gson gson = new Gson();
+		System.out.println(gson.toJson(request.getSession().getAttribute("user")));
+		return gson.toJson(request.getSession().getAttribute("user"));
+	}
+}

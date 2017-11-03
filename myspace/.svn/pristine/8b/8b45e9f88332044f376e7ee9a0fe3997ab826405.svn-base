@@ -1,0 +1,41 @@
+/**
+ * 
+ */
+package groupthree.myspace.lhf.dao.impl;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+import groupthree.myspace.lhf.bean.LogImg;
+import groupthree.myspace.lhf.dao.BaseDao;
+import groupthree.myspace.lhf.dao.LogImgDao;
+import groupthree.myspace.lhf.mapper.LogImgMapper;
+
+/**
+ * @author 罗会峰
+ *
+ */
+@Repository(value = "LogImgDaoImpl")
+public class LogImgDaoImpl extends BaseDao implements LogImgDao {
+
+	@Override
+	//查询说说图片
+	public List<LogImg> getLogImgs(){
+		return getMapper(LogImgMapper.class).getLogImgs();
+	}
+	
+	@Override
+	//写说说时往说说中添加图片
+	public int addLogImg(Integer id, Integer imglog_id, String logimg) {
+		return getMapper(LogImgMapper.class).addLogImg(id, imglog_id, logimg);
+	}
+
+	@Override
+	//写说说时添加错图片可以删除重新添加，也可以通过说说相册删除自己然为不要的图片
+	public int deleteLogImg(Integer id, Integer imglog_id) {
+		return getMapper(LogImgMapper.class).deleteLogImg(id, imglog_id);
+	}
+	
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>MySpace</title>
+<link rel="stylesheet" href="all/css/bootstrap.css" />
+<link rel="stylesheet" href="all/css/bootstrap-theme.min.css" />
+<link rel="stylesheet" href="all/css/chatStyle.css" />
+<link href="all/css/MainStyle.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="all/css/topNav.css" />
+<link rel="stylesheet" href="all/css/downTip.css" />
+<link rel="stylesheet" href="all/css/addFriendButton.css" />
+
+<script src="all/js/jquery-3.2.1.js"></script>
+<script src="all/js/socialupdate.js"></script> 
+<script type="text/javascript" src="all/js/downTip.js"></script>
+ <script type="text/javascript" src="all/js/friendChat.js"></script>
+ <style type="text/css">
+ 	body{ text-align:center} 
+	#divlower{ 
+		width: 1200px; 
+		height:800px;
+		margin-left: 300px;
+		margin-top: 50px;
+	} 
+ </style>
+</head>
+<body>
+	<!-- 顶部栏 -->
+	<div class="head-v3"></div>
+	
+	<!-- 上面 -->
+	<div id="person">
+		<a href="#"><img id="pseronBigImg" src="all/images/main2.jpg" /></a>
+		<font id="BigPersonName" size="5" style="margin-left: 20px; margin-top: 25px" color="#000000">
+			好友动态
+		</font>
+	</div>
+	
+
+	
+	<!-- 下面 -->
+	<div id="divlower">
+		<div class="content" id="ImgLog">
+			<div class="grids">
+				<div class="grid box">
+					<div class="grid-header">
+						<h3>说说的介绍之类的 </h3>
+						<ul>
+						<li id="personname"><span>邓德文</span></li>
+						<li id="time"><a href="#">发送时间</a></li>
+						</ul>
+					</div>
+					<div class="grid-img-content">
+						
+						<p>说说内容<a href="#">...</a></p>
+						<img src="./images/1.jpg" />
+						<div class="clear"> </div>
+					</div>
+	
+					<div class="comments" >
+						<li><a href="#"><img src="images/likes.png" title="likes" /></a></li>
+						<ul>
+							<li><div class="row"><div class="col-lg-6">
+							    <div class="input-group" class="returnMsg">
+							    	<input type="text" class="form-control bigInput" style="width:620px;">
+							      	<span class="input-group-btn">
+							        <button class="btn btn-default" type="button">评论</button>
+							      	</span>
+							   	</div>
+							  	</div>
+								</div>
+							</li><li></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</body>
+</html>
+

@@ -1,0 +1,15 @@
+package groupthree.myspace.lzz.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import groupthree.myspace.bean.chatLog;
+import groupthree.myspace.bean.friend;
+import groupthree.myspace.bean.person;
+
+public interface LzzFriendDao {
+	List<friend> getFriendAll(Integer id);
+	
+	List<chatLog> getChatLog(Integer person_id,Integer friend_id);
+}

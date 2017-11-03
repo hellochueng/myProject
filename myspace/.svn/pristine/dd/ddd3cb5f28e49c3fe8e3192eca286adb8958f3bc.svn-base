@@ -1,0 +1,29 @@
+package groupthree.myspace.lzz.service.serviceImpl;
+
+import javax.annotation.Resource;
+
+import groupthree.myspace.bean.person;
+import groupthree.myspace.lzz.dao.LzzPersonDao;
+import groupthree.myspace.lzz.service.LzzPersonService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service(value="LzzPersonServiceImpl")
+public class LzzPersonServiceImpl implements LzzPersonService{
+	
+	@Resource(name="LzzPersonDaoImpl")LzzPersonDao lzzPersonDao;
+	
+	@Override
+	public person login(person person) {
+		return lzzPersonDao.login(person);
+	}
+
+	@Override
+	public boolean register(person person) {
+		if(lzzPersonDao.register(person)>1)
+			return true;
+		return false;
+	}
+	
+}

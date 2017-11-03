@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:今天不能随便写,必须和接口的完全限定名保持一致 -->
+<mapper namespace="groupthree.myspace.hjn.mapper.HPersonMapper">
+	
+	<!-- 更新用户通过ID -->
+	<update id="updatePersonById" parameterType="Integer">
+		update person set is_delete = #{i} where id=#{id}
+	</update>
+	
+	<!-- 更新用户说说 -->
+	<update id="updateImgLogById" parameterType="Integer">
+		update imglog set is_delete = '1' where id=#{id}
+	</update>
+	
+	<!-- 更新用户说说评论 -->
+	<update id="updateImgLogCmtById" parameterType="Integer">
+		update imglogcmt set is_delete = '1' where id=#{id}
+	</update>
+	
+	<!--更新用户相册  -->
+	<update id="updateAldumById" parameterType="Integer">
+		update aldum set is_delete = '1' where id=#{id}
+	</update>
+	
+	<!-- 更新用户相片 -->
+	<update id="updatePictureById" parameterType="Integer">
+		update picture set is_delete = '1' where id=#{id}
+	</update>
+	
+	<!-- 更新好友 -->
+	<update id="updateFriendById" parameterType="Integer">
+		update friend set is_delete = '1' where id=#{id}
+	</update>
+	
+	<!-- 修改用户昵称 -->
+	<update id="updatePersonNameById" parameterType="Integer">
+		update person set name=#{name} where id=#{id}
+	</update>
+	
+	<!-- 修改用户密码 -->
+	<update id="updatePersonPwdById" parameterType="Integer">
+		update person set pwd=#{pwd} where id=#{id}
+	</update>
+	
+	<!-- 修改用户性别 -->
+	<update id="updatePersonSexById" parameterType="Integer">
+		update person set sex=#{sex} where id=#{id}
+	</update>
+	
+	<!-- 修改用户生日 -->
+	<update id="updatePersonBirById" parameterType="Integer">
+		update person set birthday=#{birthday} where id=#{id}
+	</update>
+	
+	<!-- 修改用户头像 -->
+	<update id="updatePersonImgById" parameterType="Integer">
+		update person set img=#{img} where id=#{id}
+	</update>
+	
+	<!-- 修改用户个性签名 -->
+	<update id="updatePersonSignById" parameterType="Integer">
+		update person set signature=#{signature} where id=#{id}
+	</update>
+</mapper>

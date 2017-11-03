@@ -1,0 +1,28 @@
+package groupthree.myspace.zfl.mapper;
+
+import groupthree.myspace.bean.imgLogCmt;
+import groupthree.myspace.bean.imgLogLiker;
+import groupthree.myspace.bean.person;
+
+import java.util.List;
+
+import javax.websocket.server.PathParam;
+
+import org.apache.ibatis.annotations.Param;
+
+public interface PersonMapper {
+	
+	//根据用户名和密码查询用户（登入）
+	person selectPersonByNameAndPwd(@Param("name")String name,@Param("pwd")String pwd);
+	
+	//查询所有用户
+	List<person> selectPerson();
+	
+	//查询用户的说说
+	List<imgLogCmt> selectImgLogCmt(int id);
+	
+	//查询用户说说的点赞用户
+	List<imgLogLiker> selectLogLiker(int id);
+	
+
+}

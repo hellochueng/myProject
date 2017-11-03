@@ -1,0 +1,78 @@
+package groupthree.myspace.hjn.controller;
+
+import groupthree.myspace.hjn.service.HPersonService;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller(value="HjnPersonController")
+@RequestMapping(value="/hjn",produces="text/plain;charset=utf-8")
+public class HjnPersonController {
+	
+	@Resource(name="HPersonServiceImp")HPersonService hPersonService;
+	//删除用户
+	@RequestMapping(value="/deleteP/{id}/{i}")
+	@ResponseBody
+	public String updatePersonById(@PathVariable("id")Integer id,@PathVariable("i")Integer i){
+		if(hPersonService.updatePersonById(id,i)==1)
+			return "1";	
+		else
+			return "0";
+	}
+	//删除说说
+	@RequestMapping(value="/deleteSS/{person_id}/{id}")
+	@ResponseBody
+	public String updateImgLogById(@PathVariable("person_id")Integer person_id,@PathVariable("id")Integer id){
+		if(hPersonService.updateImgLogById(person_id,id)==1)
+			return "1";
+		else
+			return "0";
+	}
+	//删除说说评论
+	@RequestMapping(value="/deleteSSPL")
+	@ResponseBody
+	public String updateImgLogCmtById(@PathVariable("id")Integer id){
+		hPersonService.updateImgLogCmtById(id);
+		return "1";
+	}
+	//删除相册
+	@RequestMapping(value="/deleteXC/{person_id}/{id}")
+	@ResponseBody
+	public String updateAldumById(@PathVariable("person_id")Integer person_id,@PathVariable("id")Integer id){
+		if(hPersonService.updateAldumById(person_id,id)==1)
+			return "1";
+		else
+			return "0";
+	}
+	//删除相片
+	@RequestMapping(value="/deleteXP")
+	@ResponseBody
+	public String updatePictureById(@PathVariable("id")Integer id){
+		hPersonService.updatePictureById(id);
+		return "1";
+	}
+	//删除好友
+	@RequestMapping(value="/deleteHY")
+	@ResponseBody
+	public String updateFriendById(@PathVariable("id")Integer id){
+		hPersonService.updateFriendById(id);
+		return "1";
+	}
+	//修改用户个人属性
+	@RequestMapping(value="/updatePerson")
+	@ResponseBody
+	public String updatePersonInfo(@PathVariable("id")Integer id,@PathVariable("info")String info){
+		hPersonService.updatePersonNameById(id, info);
+		hPersonService.updatePersonPwdById(id, info);
+		hPersonService.updatePersonSexById(id,info);
+		hPersonService.updatePersonBirById(id, info);
+		hPersonService.updatePersonImgById(id, info);
+		hPersonService.updatePersonSignById(id, info);
+		return "1";
+	}
+	
+}

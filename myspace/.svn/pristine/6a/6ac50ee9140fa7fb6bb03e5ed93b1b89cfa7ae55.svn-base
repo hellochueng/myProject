@@ -1,0 +1,164 @@
+@charset "UTF-8";
+
+*{margin:0px; padding:0px;}
+.msgCon{margin-top: 3%;width:600px;height:auto;background-color: bisque;}
+.msgCon .msgBox{ background:#fff;height:100%;padding:10px; margin-top:20px;}
+.msgCon .msgBox dl{height:40px; }
+.msgCon .msgBox dl dt{width:50px; height:50px;float:left;}
+.msgCon .msgBox dl dt img{border-radius:25px;}
+.msgCon .msgBox dl dd{width:auto; height:30px; line-height:35px;float:left; margin-left:8px;font-size:14px;font-family:"微软雅黑";}
+.msgCon .msgBox .msgTxt{font-size:12px; color:#666; line-height:25px;}
+.msgCon .msgBox .content{margin-top: 10px;}
+
+.msgCon .msgBox .content dl{height:30px; }
+.msgCon .msgBox .content dl dt{height:20px;float:left; }
+.msgCon .msgBox .content dl dd{height:20px; line-height:30px;float:left; margin-left:0px;font-size:12px;font-family:"微软雅黑";}
+#buttom{
+	margin-top: 40px;
+	border-bottom: 1px solid #ddd;
+}
+#content ul li{
+	list-style-type:none;
+	float:left;
+	margin:2px; 
+	cursor:pointer;
+}
+
+html {
+	font-size: 62.5%;
+	font-family: 'helvetica neue', tahoma, arial, 'hiragino sans gb',
+		'Simsun', sans-serif
+}
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code,
+	form, fieldset, legend, input, button, textarea, p, blockquote, th, td,
+	hr {
+	margin: 0;
+	padding: 0
+}
+
+body {
+	line-height: 1.333;
+	font-size: 12px
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-size: 100%;
+	font-family: arial, 'hiragino sans gb', 'microsoft yahei', 'Simsun',
+		sans-serif
+}
+
+ul li:nth-child a{
+	background: none;
+}
+
+
+
+li {
+	list-style: none;
+}
+
+a:link, a:visited {
+	text-decoration: none
+}
+
+.head-v3 {
+	position: relative;
+	z-index: 100;
+	min-width: 1200px
+}
+
+.head-v3 .navigation-inner {
+	margin: 0 auto;
+	width: 1200px;
+	position: relative
+}
+/*导航栏背景*/
+.navigation-up {
+	height: 60px;
+	background: #000000;
+	opacity: 1;
+	float: none;
+}
+
+.navigation-up .navigation-v3 {
+	margin-left: -50px;
+	float: left;
+	_margin-left: 10px
+}
+
+.navigation-up .navigation-v3 ul {
+	float: left
+}
+
+.navigation-up .navigation-v3 li {
+	float: left;
+	font: normal 16px/59px "microsoft yahei";
+	color: #fff
+}
+
+.navigation-up .navigation-v3 li h2 {
+	font-weight: normal;
+	padding: 0;
+	margin: 0
+}
+
+.navigation-up .navigation-v3 li h2 a {
+	padding: 0 20px;
+	color: white;
+	display: inline-block;
+	height: 60px;
+	font-family: "microsoft yahei"
+}
+
+.navigation-up .navigation-v3 li h2 a:hover {
+	padding: 0 20px;
+	color: #FF8C00;
+	display: inline-block;
+	height: 60px;
+	font-family: "microsoft yahei"
+}
+
+.navigation-down {
+	position: absolute;
+	top: 60px;
+	left: 0px;
+	width: 100%
+}
+/*下拉栏背景*/
+#friendTrends {
+	background-image: url(../images/navImg.jpg);
+	background-position: -213px -162px;
+	width: 35px;
+	height: 35px;
+	margin-top: 12px;
+	margin-right: 10px;
+	float: left;
+	border-radius: 15px;
+}
+
+#findFriend {
+	background-image: url(../images/navImg.jpg);
+	background-position: -107px -3px;
+	width: 35px;
+	height: 35px;
+	margin-top: 12px;
+	margin-right: 10px;
+	float: left;
+	border-radius: 15px;
+}
+
+.personImg {
+	width: 35px;
+	height: 35px;
+	margin-top: 12px;
+	margin-right: 10px;
+	float: left;
+	border-radius: 15px;
+	background-position: -10px -10px;
+}
+
+.selectNav {
+	background-color: #000000;
+	color: black;
+}

@@ -1,0 +1,66 @@
+package groupthree.myspace.listenser;
+
+import groupthree.myspace.bean.person;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
+import javax.servlet.http.HttpSessionAttributeListener;
+import javax.servlet.http.HttpSessionBindingEvent;
+import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.HttpSessionListener;
+
+@WebListener(value="UserList")
+public class loginListenser implements  HttpSessionListener,ServletContextListener,HttpSessionAttributeListener{
+	private ServletContext applicatin = null;
+	
+	@Override
+	public void sessionCreated(HttpSessionEvent arg0) {
+		
+	}
+
+	@Override
+	public void sessionDestroyed(HttpSessionEvent arg0) {
+		person person = (person)arg0.getSession().getAttribute("user");
+		Map<Integer,String> userList = (Map<Integer, String>) this.applicatin.getAttribute("userList");
+		if(userList.containsKey(person.getSpace())){
+			userList.remove(person.getSpace());
+			this.applicatin.setAttribute("userList", userList);
+		}
+	}
+
+	@Override
+	public void contextInitialized(ServletContextEvent arg0) {
+		this.applicatin = arg0.getServletContext();
+		Map<Integer,String> userList = new HashMap<Integer, String>();
+		applicatin.setAttribute("userList",userList);
+	}
+
+	@Override
+	public void contextDestroyed(ServletContextEvent arg0) {
+		
+	}
+
+	@Override
+	public void attributeAdded(HttpSessionBindingEvent arg0) {
+		person person = (person)arg0.getSession().getAttribute("user");
+		Map<Integer,String> userList = (Map<Integer, String>) this.applicatin.getAttribute("userList");
+		userList.put(person.getSpace(), person.getName());
+		this.applicatin.setAttribute("userList", userList);
+		
+	}
+
+	@Override
+	public void attributeRemoved(HttpSessionBindingEvent arg0) {
+		
+	}
+
+	@Override
+	public void attributeReplaced(HttpSessionBindingEvent arg0) {
+		
+	}
+}

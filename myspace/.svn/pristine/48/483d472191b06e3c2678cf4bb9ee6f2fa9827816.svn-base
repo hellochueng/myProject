@@ -1,0 +1,30 @@
+jQuery(document).ready(function(){
+	setTopNav();
+	setName();
+});
+
+function setTopNav(){
+	var navBody='<div class="navigation-up"><div class="navigation-inner" ><div class="navigation-v3" ><ul >';
+	navBody+='<li class="nav-up-selected-inpage" _t_nav="home"><h2><a style="font-size: 18px;"><img class="personImg" src="all/images/myspace2.png">myspace</a></h2></li>';
+	navBody+='<li class="selectNav" _t_nav="product"><h2><a href="#"><div id="friendTrends"></div>好友动态</a></h2></li>';
+	navBody+='<li class="" _t_nav="wechat"><h2><a href="#"><div id="findFriend"></div>找朋友?</a></h2></li>';
+	navBody+='<li><h2><a href="#" style="width: 400px;"></a></h2></li>';
+	navBody+='<li class="" _t_nav="cooperate"><h2><a href="#" class="tooltips" tooltip="" tooltip-position="bottom"><span>';
+	navBody+='<img src="all/images/w6.jpg">我是胖虎</span><img class="personImg" src="all/images/w6.jpg" /><font id="SmallPersonName">个人姓名</font></a></h2></li>';
+	navBody+='<li _t_nav="support" "><h2><a href="#">帮助与支持</a></h2></li>';
+	navBody+='</ul></div></div></div>';
+	$(".head-v3").html(navBody);
+}
+
+function setName(){
+	$.ajax({
+		url:"/myspace/personAction/setPersonInfo",
+		async:false,
+		dataType:"json",
+		success:function(data){
+			$("#SmallPersonName").html(data.name);
+			$("#BigPersonName").html(data.name);
+		}
+	});
+}
+

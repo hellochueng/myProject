@@ -1,0 +1,28 @@
+package groupthree.myspace.zfl.dao.imp;
+
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
+
+import groupthree.myspace.bean.person;
+import groupthree.myspace.zfl.dao.BasicDao;
+import groupthree.myspace.zfl.dao.IPersonDao;
+import groupthree.myspace.zfl.mapper.PersonMapper;
+
+
+public class PersonDaoImp extends BasicDao implements IPersonDao {
+
+	@Override
+	public List<person> selectPerson() {
+		// TODO Auto-generated method stub
+		return getMapper(PersonMapper.class).selectPerson();
+	}
+
+	@Override
+	public person selectPersonByNameAndPwd(String name, String pwd) {
+		// TODO Auto-generated method stub
+		return getMapper(PersonMapper.class).selectPersonByNameAndPwd(name,pwd);
+	}
+
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:今天不能随便写,必须和接口的完全限定名保持一致 -->
+<mapper namespace="groupthree.myspace.lhf.mapper.LogImgMapper">
+	<!-- 查询所有未删除的说说图片（此处即is_delete为0的数据，当is_delete为非0数即被删除用户无法查看到） -->
+	<select id="getLogImgs" resultType="lhfli">
+		select * from logimg
+	</select>
+	<!-- 写说说时添加图片  -->
+	<insert id="addLogImg">
+		insert into logimg values(#{id},#{imglog_id},#{logimg})
+	</insert>
+	<!-- 删除说说 即把is_delete修改为非0数，默认为1，使用户无法查询到即可 -->
+	<delete id="deleteLogImg">
+		delete logimg  where id=#{id} and imglog_id=#{imglog_id}
+	</delete>
+</mapper>

@@ -1,0 +1,25 @@
+package groupthree.myspace.lzz.service;
+
+import java.util.List;
+
+import groupthree.myspace.bean.friendApply;
+import groupthree.myspace.bean.imgLog;
+import groupthree.myspace.bean.imgLogCmt;
+import groupthree.myspace.bean.imgLogLiker;
+import groupthree.myspace.bean.person;
+
+public interface LzzPersonService {
+	person login(person person);
+	boolean register(person person);
+	boolean changePersonInfo(person person);
+	List<person> getPersonAll(Integer id);
+	boolean applyFriend(friendApply friendApply);
+	List<friendApply> getAllApply();
+	boolean isSendApply(friendApply friendApply);
+	List<imgLog> getPersonImgLog(Integer id);
+	boolean addLog(imgLog imgLog);
+	boolean deleteLog(Integer id);
+	
+	void likeLog(imgLogLiker imgLogLiker);
+	int sendCmt(imgLogCmt imgLogCmt);
+}
